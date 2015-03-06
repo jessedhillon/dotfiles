@@ -128,15 +128,25 @@ fi
 EDITOR=vim
 
 # completions
-for f in $HOME/Devel/dotfiles/completions.d; do
-    source $f
-done
+if [ -d $HOME/.completions.d ]; then
+    for f in $HOME/.completions.d/*; do
+        source $f
+    done
+fi
+
+# source other bash things
+if [ -d $HOME/.bash ]; then
+    for f in $HOME/.bash/*; do
+        source $f
+    done
+fi
 
 # python startup
 export PYTHONSTARTUP=~/.pythonstartup
 
 # virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
-source ~/Devel/dotfiles/ps1.sh
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Devel
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
