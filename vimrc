@@ -7,6 +7,8 @@ if &term =~ '^screen'
     execute "set <xLeft>=\e[1;*D"
 endif
 
+set t_Co=256
+
 set modeline
 set nofoldenable
 set nowrap
@@ -40,10 +42,20 @@ Plugin 'altercation/vim-colors-solarized'
 Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'pangloss/vim-javascript'
+Bundle 'slim-template/vim-slim.git'
+Plugin 'wincent/command-t'
 Plugin 'jessedhillon/vim-easycomment'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" command-t
+map <silent> <C-T> :CommandT<CR>
+if &term =~ "xterm" || &term =~ "screen"
+    let g:CommandTCancelMap = ['<ESC>', '<C-c>']
+    let g:CommandTSelectNextMap = ['<C-j>', '<ESC>OB']
+    let g:CommandTSelectPrevMap = ['<C-k>', '<ESC>OA']
+endif
 
 " powerline
 let g:Powerline_symbols = 'fancy'
@@ -64,6 +76,8 @@ endif
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType python,javascript,ruby,htmljinja,css,scss set number
+au FileType ruby set ts=2
+au FileType ruby set sw=2
 
 " wildmenu
 set wildmenu
