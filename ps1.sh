@@ -109,6 +109,10 @@ colorize() {
     fi
 }
 
+gem_set_name () {
+    [[ "$GEM_HOME" =~ .+@.+ ]] && echo $GEM_HOME | cut -d'@' -f2
+}
+
 blank_if_zero() {
     if [ $1 -eq 0 ]; then
         echo ""
@@ -119,8 +123,10 @@ blank_if_zero() {
     [[ $(git_status) == "0" ]] && gitcolor=$pale_green || gitcolor=$scarlet
 
     local venv=$(virtualenv_name)
+    local gemset=$(gem_set_name)
     local gitprompt=$(git_prompt)
-    local joined=`join "$off|$purple" $venv $gitprompt`
+    local env_name=`join "." $venv $gemset`
+    local joined=`join "$dark_grey|$gitcolor" $env_name $gitprompt`
     local bracketed=$(colorize $gitcolor "`append_if ' ' $(bracket_if $joined)`")
 
     local userhost=$(colorize $brown "\u@\h")
