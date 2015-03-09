@@ -12,10 +12,10 @@ local brown="\[\033[0;33m\]"
 local yellow="\[\033[1;33m\]"
 local white="\[\033[1;37m\]"
 
-local lime="\e[38;5;148m"
-local pale_green="\e[38;5;191m"
-local sky_blue="\e[38;5;51m"
-local scarlet="\e[38;5;9m"
+local lime="\[\033[38;5;148m\]"
+local pale_green="\[\033[38;5;191m\]"
+local sky_blue="\[\033[38;5;51m\]"
+local scarlet="\[\033[38;5;9m\]"
 local dark_grey="\[\033[38;5;240m\]"
 local light_cyan="\[\033[1;36m\]"
 local light_blue="\[\033[1;34m\]"
@@ -132,7 +132,7 @@ blank_if_zero() {
 
     local timestamp=$(colorize $dark_grey "[`date +"%H:%M"`]")
 
-    export PS1="$timestamp $bracketed$userhost$jobscount:$dirscount$cwd$prompt "
+    export PS1="$timestamp $bracketed$userhost$jobscount:$dirscount$cwd$prompt$off "
 }
 
 PROMPT_COMMAND="_update_ps1"
