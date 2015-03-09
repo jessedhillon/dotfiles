@@ -1,4 +1,4 @@
-# vim: set ft=sh
+# vim: set ft=sh:
 
 alias xclip="xclip -selection clipboard"
 alias rm="trash"
