@@ -81,7 +81,7 @@ au FileType ruby set sw=2
 
 " wildmenu
 set wildmenu
-set wildignore=*.pyc,*.swp,*.swo
+set wildignore=*.pyc,*.swp,*.swo,*.egg-info/
 
 " window navigation
 map <space> <c-W>w
