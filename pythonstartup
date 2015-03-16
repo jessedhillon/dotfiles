@@ -1,0 +1,24 @@
+# vim: set ft=python
+
+import sys
+import atexit
+import os
+import readline
+import rlcompleter
+from pprint import pprint as pp
+
+sys.path.insert(1,'/home/jesse/.local/lib/python2.7/site-packages')
+historyPath = os.path.expanduser("~/.python_history")
+
+def save_history(historyPath=historyPath):
+    import readline
+    readline.write_history_file(historyPath)
+
+if os.path.exists(historyPath):
+    readline.read_history_file(historyPath)
+
+readline.parse_and_bind('tab: complete')
+atexit.register(save_history)
+sys.ps1 = 'py-{v[0]}.{v[1]}> '.format(v=sys.version_info)
+sys.ps2 = '{}> '.format(' ' * (len(sys.ps1) - 2))
+del os, atexit, readline, rlcompleter, save_history, historyPath
