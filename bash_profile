@@ -21,6 +21,3 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 PATH=".:$PATH"
-
-# xmodmap
-sleep 4 && xmodmap ~/.Xmodmap
