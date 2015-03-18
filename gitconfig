@@ -1,5 +1,8 @@
 # vim: set ft=dosini:
 
+[core]
+    excludesfile = ~/.gitignore
+
 [alias]
     st = status
     ci = commit --verbose

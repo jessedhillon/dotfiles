@@ -1,0 +1,6 @@
+*.pyo
+*.pyc
+*.egg-info
+.coverage
+*.log
+MANIFEST.in
