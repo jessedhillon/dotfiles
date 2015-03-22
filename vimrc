@@ -114,3 +114,6 @@ nnoremap <silent> S :exec "normal a".nr2char(getchar())."\e"<CR>
 " commenting / uncommenting visually selected text
 vmap <silent> <C-_> :call ToggleCommentVisual()<CR>
 nmap <silent> <C-_> :call ToggleCommentLine()<CR>
+
+au FileType scss let b:comment_style="inline"
+au FileType scss let b:comment_opener="//"
