@@ -8,7 +8,7 @@
     ci = commit --verbose
     co = checkout
     br = branch
-    ls = show --pretty=\"format:%s (%cn, %ar)\" --name-only
+    ls = show --pretty=\"format:<%h> %s (%cn, %ar)\n---------\" --name-only
     unstage = reset HEAD
 [user]
     email = jesse.dhillon@grandroundshealth.com
