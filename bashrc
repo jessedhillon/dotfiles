@@ -134,6 +134,8 @@ if [ -d $HOME/.completions.d ]; then
     done
 fi
 
+PROMPT_COMMANDS=()
+
 # source other bash things
 if [ -d $HOME/.bash ]; then
     for f in $HOME/.bash/*; do
@@ -163,3 +165,8 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm"  ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session as a function
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# construct PROMPT_COMMAND
+joined="$( printf " && %s" "${PROMPT_COMMANDS[@]}" )"
+PROMPT_COMMAND="${joined:4}"
+$PROMPT_COMMAND

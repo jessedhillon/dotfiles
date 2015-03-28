@@ -133,9 +133,7 @@ blank_if_zero() {
     local cwd=$(colorize $cyan "\w")
     local prompt=$(colorize $cyan '>')
 
-    echo "jobs"
-    echo $(jobs -l)
-    local jobscount=$(colorize $lime $(prepend_if "%" `blank_if_zero $(jobs | wc -l)`))
+    local jobscount=$(colorize $lime $(prepend_if "%" `blank_if_zero $(jobs -s | wc -l)`))
     local dirscount=$(colorize $blue $(append_if "#" `blank_if_zero $(dirs -v | cut -d' ' -f2 | sort -nr | head -1)`))
 
     local timestamp=$(colorize $dark_grey "[`date +"%H:%M"`]")
