@@ -1,0 +1,14 @@
+#!/bin/bash
+# This hook is sourced after every virtualenv is activated.
+
+# change to project home directory, if it exists
+projectdir=$PROJECT_HOME/$(basename $VIRTUAL_ENV)
+if [ -d "$projectdir" ]; then
+    if [ -z "$(find ${projectdir} -wholename ${PWD})" ]; then
+        cd $projectdir
+    fi
+fi
+
+# add node_modules binaries to PATH
+VIRTUALENV_OLDPATH="$PATH"
+PATH="$PATH:$projectdir/node_modules/**/bin"
