@@ -3,7 +3,12 @@ function venv_prompt()
   DIR=$PWD
   while true; do
     if [ -e "${DIR}/.virtualenv" ]; then
-      workon `cat ${DIR}/.virtualenv`
+      VENV=$(cat ${DIR}/.virtualenv)
+      if [ -z "$VIRTUAL_ENV" ]; then
+          workon `cat ${DIR}/.virtualenv`
+      elif [ "$(basename $VIRTUAL_ENV)" != "$VENV" ]; then
+          workon `cat ${DIR}/.virtualenv`
+      fi
       break
     fi
 
