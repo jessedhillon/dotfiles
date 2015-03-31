@@ -14,3 +14,5 @@
 [user]
     email = jesse.dhillon@grandroundshealth.com
     name = Jesse Dhillon
+[push]
+	default = simple
