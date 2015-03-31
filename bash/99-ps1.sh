@@ -12,6 +12,7 @@ local brown="\[\033[0;33m\]"
 local yellow="\[\033[1;33m\]"
 local white="\[\033[1;37m\]"
 
+local positive_green="\[\033[38;5;64m\]"
 local lime="\[\033[38;5;148m\]"
 local pale_green="\[\033[38;5;191m\]"
 local sky_blue="\[\033[38;5;51m\]"
@@ -120,7 +121,7 @@ blank_if_zero() {
         echo $1
     fi
 }
-    [[ $(git_status) == "0" ]] && gitcolor=$pale_green || gitcolor=$scarlet
+    [[ $(git_status) == "0" ]] && gitcolor=$positive_green || gitcolor=$scarlet
 
     local venv=$(virtualenv_name)
     local gemset=$(gem_set_name)
