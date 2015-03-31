@@ -17,15 +17,14 @@ local lime="\[\033[38;5;148m\]"
 local pale_green="\[\033[38;5;191m\]"
 local sky_blue="\[\033[38;5;51m\]"
 local scarlet="\[\033[38;5;9m\]"
-local dark_grey="\[\033[38;5;240m\]"
+local dark_grey="\[\033[38;5;238m\]"
+local lavender="\[\033[38;5;59m\]"
 local light_cyan="\[\033[1;36m\]"
 local light_blue="\[\033[1;34m\]"
 local light_green="\[\033[1;32m\]"
 local light_red="\[\033[1;31m\]"
 local light_purple="\[\033[1;35m\]"
 local light_grey="\[\033[0;37m\]"
-
-local lavender="\e[38;5;104m"
 
 local off="\[\033[0m\]"
 
@@ -138,8 +137,9 @@ blank_if_zero() {
     local dirscount=$(colorize $blue $(append_if "#" `blank_if_zero $(dirs -v | cut -d' ' -f2 | sort -nr | head -1)`))
 
     local timestamp=$(colorize $dark_grey "[`date +"%H:%M"`]")
+    local awsenv=$(colorize $lavender "`append_if ' ' $(angle_if $(prepend_if "aws${dark_grey}:${lavender}" ${AWS_ENVIRONMENT:0:3}))`")
 
-    export PS1="$timestamp $bracketed$userhost$jobscount:$dirscount$cwd$prompt$off "
+    export PS1="$timestamp $awsenv$bracketed$userhost$jobscount$dark_grey:$dirscount$cwd$prompt$off "
 }
 
 PROMPT_COMMANDS=(${PROMPT_COMMANDS[@]} '_update_ps1')
