@@ -117,3 +117,6 @@ nmap <silent> <C-_> :call ToggleCommentLine()<CR>
 
 au FileType scss let b:comment_style="inline"
 au FileType scss let b:comment_opener="//"
+
+au FileType yaml let b:comment_style="inline"
+au FileType yaml let b:comment_opener="#"
