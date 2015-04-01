@@ -137,7 +137,7 @@ blank_if_zero() {
     local dirscount=$(colorize $blue $(append_if "#" `blank_if_zero $(dirs -v | cut -d' ' -f2 | sort -nr | head -1)`))
 
     local timestamp=$(colorize $dark_grey "[`date +"%H:%M"`]")
-    local awsenv=$(colorize $lavender "`append_if ' ' $(angle_if $(prepend_if "aws${dark_grey}:${lavender}" ${AWS_ENVIRONMENT:0:3}))`")
+    local awsenv=$(colorize $lavender "`append_if ' ' $(prepend_if "#" ${AWS_ENVIRONMENT:0:3})`")
 
     export PS1="$timestamp $awsenv$bracketed$userhost$jobscount$dark_grey:$dirscount$cwd$prompt$off "
 }
