@@ -9,7 +9,7 @@ case $- in
 esac
 
 # add local directory to PATH
-export PATH=.:${HOME}/.bin:$PATH
+export PATH=.:${HOME}/.local/bin:$PATH
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
