@@ -8,7 +8,7 @@
     ci = commit --verbose
     co = checkout
     br = branch
-    ls = show --pretty=\"format:<%h> %s (%cn, %ar)\n---------\" --name-only
+    ls = show --pretty=\"format:%h %s (%cn, %ar)\n-------\" --name-status
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     unstage = reset HEAD
 [user]
