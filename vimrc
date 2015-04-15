@@ -45,6 +45,7 @@ Plugin 'pangloss/vim-javascript'
 Bundle 'slim-template/vim-slim.git'
 Plugin 'wincent/command-t'
 Plugin 'jessedhillon/vim-easycomment'
+Plugin 'vim-scripts/sudo.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
