@@ -25,7 +25,7 @@ linux_get_bat ()
 {
     bf=$(cat $BAT_FULL)
     bn=$(cat $BAT_NOW)
-    echo $(( 100 * $bn / $bf ))
+    printf "%.0f" $(echo "scale=2;100 * ${bn}/${bf} + 0.2" | bc)
 }
 
 
