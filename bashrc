@@ -127,6 +127,9 @@ fi
 # vim
 EDITOR=vim
 
+# pager
+PAGER=less
+
 # completions
 if [ -d $HOME/.completions.d ]; then
     for f in $HOME/.completions.d/*; do
