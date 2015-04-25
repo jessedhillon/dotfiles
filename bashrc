@@ -10,6 +10,7 @@ esac
 
 # add local directory to PATH
 export PATH=.:${HOME}/.local/bin:$PATH
+export FIGNORE=.egg-info
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
