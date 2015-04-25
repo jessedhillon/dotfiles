@@ -41,6 +41,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Bundle 'slim-template/vim-slim.git'
 Plugin 'wincent/command-t'
@@ -77,8 +78,8 @@ endif
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType python,javascript,ruby,htmljinja,css,scss set number
-au FileType ruby set ts=2
-au FileType ruby set sw=2
+au FileType ruby,htmljinja set ts=2
+au FileType ruby,htmljinja set sw=2
 
 " wildmenu
 set wildmenu
