@@ -109,6 +109,13 @@ map tl :tabnext<CR>
 nmap t< :tabmove -1<CR>
 nmap t> :tabmove +1<CR>
 
+set timeoutlen=300 ttimeoutlen=0
+" insert mode navigation
+imap <ESC>h <left>
+imap <ESC>l <right>
+imap <ESC>j <down>
+imap <ESC>k <up>
+
 " insert single character
 nnoremap <silent> s :exec "normal i".nr2char(getchar())."\e"<CR>
 nnoremap <silent> S :exec "normal a".nr2char(getchar())."\e"<CR>
