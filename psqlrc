@@ -1,0 +1,1 @@
+\set PROMPT1 'pg [%`date +"%H:%M:%S"`] %m:%/%# '
