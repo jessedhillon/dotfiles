@@ -22,7 +22,6 @@ set directory=/tmp//,.
 set ts=4
 set sw=4
 set et
-set softtabstop=0
 
 " syntax & highlighting
 syntax sync fromstart
@@ -81,6 +80,9 @@ au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType python,javascript,ruby,htmljinja,css,scss set number
 au FileType ruby,htmljinja set ts=2
 au FileType ruby,htmljinja set sw=2
+
+" some ft plugins set softtabstop (e.g. python)
+set softtabstop=0
 
 " wildmenu
 set wildmenu
