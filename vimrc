@@ -112,7 +112,7 @@ map tl :tabnext<CR>
 nmap t< :tabmove -1<CR>
 nmap t> :tabmove +1<CR>
 
-set timeoutlen=300 ttimeoutlen=0
+set timeoutlen=200 ttimeoutlen=0
 " insert mode navigation
 imap <ESC>h <left>
 imap <ESC>l <right>
