@@ -1,7 +1,14 @@
 ForwardAgent Yes
 
 Host *.grandrounds.com
-User ubuntu
+  User ubuntu
 
 Host *.uat
-User ubuntu
+  User ubuntu
+
+Host deva0.net
+  User deva0
+
+Host *.amazonaws.com
+  IdentityFile ~/.ssh/jessedhillon-bonanza.pem
+  ForwardAgent yes
