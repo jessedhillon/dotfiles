@@ -47,9 +47,9 @@ Plugin 'mitsuhiko/vim-jinja'
 Plugin 'wincent/command-t'
 Plugin 'jessedhillon/vim-easycomment'
 Plugin 'vim-scripts/sudo.vim'
+Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()            " required
-filetype plugin indent on    " required
 
 " command-t
 map <silent> <C-T> :CommandT<CR>
@@ -64,6 +64,8 @@ let g:Powerline_symbols = 'fancy'
 
 " solarized
 syntax enable
+filetype off
+filetype plugin indent on
 set background=dark
 colorscheme solarized
 
