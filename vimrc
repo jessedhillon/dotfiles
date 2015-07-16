@@ -91,9 +91,11 @@ set wildmenu
 set wildignore=*.pyc,*.swp,*.swo,*.egg-info/
 
 " window navigation
-map <space> <c-W>w
-map <c-J> <C-W>j<C-W>_
-map <c-K> <C-W>k<C-W>_
+nmap <space> <c-W>w
+nmap <c-j> <C-W>j<C-W>_
+nmap <c-k> <C-W>k<C-W>_
+nmap <s-j> :res -5<CR>
+nmap <s-k> :res +5<CR>
 
 " unshift
 imap <s-tab> <c-d>
@@ -116,10 +118,10 @@ nmap t> :tabmove +1<CR>
 
 set timeoutlen=200 ttimeoutlen=0
 " insert mode navigation
-imap <ESC>h <left>
-imap <ESC>l <right>
-imap <ESC>j <down>
-imap <ESC>k <up>
+" imap <ESC>h <left>
+" imap <ESC>l <right>
+" imap <ESC>j <down>
+" imap <ESC>k <up>
 
 " insert single character
 nnoremap <silent> s :exec "normal i".nr2char(getchar())."\e"<CR>
