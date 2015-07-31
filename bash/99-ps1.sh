@@ -125,14 +125,14 @@ blank_if_zero() {
     fi
 }
     [[ $(git_status) == "0" ]] && gitcolor=$positive_green || gitcolor=$scarlet
-    [[ $(stash_length) == "0" ]] && stashprompt="" || stashprompt="$(stash_length)"
+    [[ $(stash_length) == "0" ]] && stashprompt="" || stashprompt="$(colorize $sky_blue "#$(stash_length)")$gitcolor"
 
     local venv=$(virtualenv_name)
     local gemset=$(gem_set_name)
     local gitprompt=$(git_prompt)
     local env_name=`join "." $venv $gemset`
-    local stashprompt=$(colorize $sky_blue $(prepend_if '#' $stashprompt))
-    local joined=`join "$dark_grey|$gitcolor" $env_name $gitprompt$stashprompt$gitcolor`
+    # local stashprompt=$(colorize $sky_blue $(prepend_if '#' $stashprompt))
+    local joined=`join "$dark_grey|$gitcolor" $env_name $gitprompt$stashprompt`
     local bracketed=$(colorize $gitcolor "`append_if ' ' $(bracket_if $joined)`")
 
     local userhost=$(colorize $brown "\u@\h")
