@@ -124,6 +124,14 @@ blank_if_zero() {
         echo $1
     fi
 }
+
+    declare -A awshash
+    awshash=([production]=prod [development]=dev [uat]=uat)
+    awsenv=""
+    if [[ $AWS_ENVIRONMENT && ${awshash[$AWS_ENVIRONMENT]} ]]; then
+        awsenv=${awshash[$AWS_ENVIRONMENT]}
+    fi
+
     [[ $(git_status) == "0" ]] && gitcolor=$positive_green || gitcolor=$scarlet
     [[ $(stash_length) == "0" ]] && stashprompt="" || stashprompt="$(colorize $sky_blue "#$(stash_length)")$gitcolor"
 
@@ -143,7 +151,7 @@ blank_if_zero() {
     local dirscount=$(colorize $blue $(append_if "#" `blank_if_zero $(dirs -v | cut -d' ' -f2 | sort -nr | head -1)`))
 
     local timestamp=$(colorize $dark_grey "[`date +"%H:%M"`]")
-    local awsenv=$(colorize $lavender "`append_if ' ' $(prepend_if "#" ${AWS_ENVIRONMENT:0:3})`")
+    local awsenv=$(colorize $lavender "`append_if ' ' $(prepend_if "#" ${awsenv})`")
 
     export PS1="$timestamp $awsenv$bracketed$userhost$jobscount$dark_grey:$dirscount$cwd$prompt$off "
 }
