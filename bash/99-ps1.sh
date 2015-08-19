@@ -133,7 +133,7 @@ blank_if_zero() {
     fi
 
     [[ $(git_status) == "0" ]] && gitcolor=$positive_green || gitcolor=$scarlet
-    [[ $(stash_length) == "0" ]] && stashprompt="" || stashprompt="$(colorize $sky_blue "#$(stash_length)")$gitcolor"
+    [[ $(stash_length) == "0" ]] && stashprompt="" || stashprompt="$(colorize $sky_blue "@$(stash_length)")$gitcolor"
 
     local venv=$(virtualenv_name)
     local gemset=$(gem_set_name)
