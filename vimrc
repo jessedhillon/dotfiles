@@ -80,8 +80,9 @@ endif
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType python,javascript,ruby,htmljinja,css,scss set number
-au FileType ruby,htmljinja set ts=2
-au FileType ruby,htmljinja set sw=2
+au FileType ruby,htmljinja,html,scss,css set ts=2
+au FileType ruby,htmljinja,html,scss,css set sw=2
+au FileType scss set iskeyword+=-
 
 " some ft plugins set softtabstop (e.g. python)
 set softtabstop=0
