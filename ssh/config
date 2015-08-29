@@ -1,9 +1,9 @@
-ForwardAgent Yes
-
 Host *.grandrounds.com
+  ForwardAgent yes
   User ubuntu
 
 Host *.uat
+  ForwardAgent yes
   User ubuntu
 
 Host deva0.net
