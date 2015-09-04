@@ -26,6 +26,7 @@ local light_red="\[\033[1;31m\]"
 local light_purple="\[\033[1;35m\]"
 local light_grey="\[\033[0;37m\]"
 
+local warning="\[\033[38;5;195m\[\033[48;5;196m"
 local off="\[\033[0m\]"
 
 angle_if() {
@@ -136,6 +137,11 @@ blank_if_zero() {
     awsenv=""
     if [[ $AWS_ENVIRONMENT && ${awshash[$AWS_ENVIRONMENT]} ]]; then
         awsenv=${awshash[$AWS_ENVIRONMENT]}
+        if [[ $awsenv == "prod" ]]; then
+            awscolor=$warning
+        else
+            awscolor=$lavender
+        fi
     fi
 
     [[ $(git_status) == "0" ]] && gitcolor=$positive_green || gitcolor=$scarlet
@@ -157,7 +163,7 @@ blank_if_zero() {
     local dirscount=$(colorize $blue $(append_if "#" `blank_if_zero $(dirs -v | cut -d' ' -f2 | sort -nr | head -1)`))
 
     local timestamp=$(colorize $dark_grey "[`date +"%H:%M"`]")
-    local awsenv=$(colorize $lavender "`append_if ' ' $(prepend_if "#" ${awsenv})`")
+    local awsenv=$(colorize $awscolor "`append_if "$off " $(prepend_if "#" ${awsenv})`")
 
     export PS1="$timestamp $awsenv$bracketed$userhost$jobscount$dark_grey:$dirscount$cwd$prompt$off "
 }
