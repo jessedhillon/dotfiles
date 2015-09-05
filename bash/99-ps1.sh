@@ -125,6 +125,12 @@ blank_if_zero() {
     fi
 }
 
+    if [[ $TERM =~ "256color"  ]]; then
+        host_color="\[\033[38;5;$((16 + $(hostname | cksum | cut -c1-3) % 216))m\]";
+    else
+        host_color="\[\033[1;$((31 + $(hostname | cksum | cut -c1-3) % 6))m\]";
+    fi
+
     declare -A awshash
     awshash=([production]=prod [development]=dev [uat]=uat)
     awsenv=""
@@ -143,7 +149,7 @@ blank_if_zero() {
     local joined=`join "$dark_grey|$gitcolor" $env_name $gitprompt$stashprompt`
     local bracketed=$(colorize $gitcolor "`append_if ' ' $(bracket_if $joined)`")
 
-    local userhost=$(colorize $brown "\u@\h")
+    local userhost=$(colorize $brown "\u${host_color}@\h")
     local cwd=$(colorize $cyan "\w")
     local prompt=$(colorize $cyan '>')
 
