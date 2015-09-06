@@ -19,4 +19,5 @@ Host *.amazonaws.com
 
 Host pitandpug.com
   IdentityFile ~/.ssh/jessedhillon-bonanza.pem
+  User ubuntu
   ForwardAgent yes
