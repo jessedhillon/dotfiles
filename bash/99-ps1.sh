@@ -185,7 +185,7 @@ blank_if_zero() {
     local timestamp=$(colorize $dark_grey "[`date +"%H:%M"`]")
     local awsenv=$(colorize $awscolor "`append_if "$off " $(prepend_if "#" ${awsenv})`")
 
-    export PS1="$timestamp $awsenv$bracketed$userhost$jobscount$dark_grey:$dirscount$cwd$prompt$off "
+    export PS1="${timestamp} ${awsenv}${bracketed}${userhost}${jobscount}${dark_grey}:${dirscount}${cwd}${prompt}${off} "
 }
 
 PROMPT_COMMANDS=(${PROMPT_COMMANDS[@]} '_update_ps1')
