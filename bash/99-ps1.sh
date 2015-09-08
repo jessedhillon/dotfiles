@@ -15,7 +15,7 @@ local white="\[\033[1;37m\]"
 local positive_green="\[\033[38;5;64m\]"
 local lime="\[\033[38;5;148m\]"
 local pale_green="\[\033[38;5;191m\]"
-local sky_blue="\[\033[38;5;51m\]"
+local sky_blue="\[\033[38;5;81m\]"
 local scarlet="\[\033[38;5;9m\]"
 local dark_grey="\[\033[38;5;238m\]"
 local lavender="\[\033[38;5;59m\]"
@@ -25,8 +25,9 @@ local light_green="\[\033[1;32m\]"
 local light_red="\[\033[1;31m\]"
 local light_purple="\[\033[1;35m\]"
 local light_grey="\[\033[0;37m\]"
+local orange="\[\033[38;5;208m\]"
 
-local warning="\[\033[38;5;195m\[\033[48;5;196m"
+local warning="\[\033[38;5;195m\]\[\033[48;5;196m\]"
 local off="\[\033[0m\]"
 
 angle_if() {
@@ -69,7 +70,13 @@ stash_length() {
 }
 
 git_status() {
-    echo $(git st -s 2> /dev/null | wc -l)
+    if [[ $(git ls-files -m 2> /dev/null | wc -l) != "0" ]]; then
+        echo "modified"
+    elif [[ $(git st --porcelain 2> /dev/null | wc -l) != "0" ]]; then
+        echo "untracked"
+    else
+        echo "clean"
+    fi
 }
 
 join() {
@@ -144,15 +151,22 @@ blank_if_zero() {
         fi
     fi
 
-    [[ $(git_status) == "0" ]] && gitcolor=$positive_green || gitcolor=$scarlet
-    [[ $(stash_length) == "0" ]] && stashprompt="" || stashprompt="$(colorize $sky_blue "@$(stash_length)")$gitcolor"
+    gs=$(git_status)
+    if [[ $gs == "modified" ]]; then
+        gitcolor=$scarlet
+    elif [[ $gs == "untracked" ]]; then
+        gitcolor=$sky_blue
+    else
+        gitcolor=$positive_green
+    fi
+
+    [[ $(stash_length) == "0" ]] && stashprompt="" || stashprompt="$(colorize $sky_blue "@$(stash_length)")${gitcolor}"
 
     local venv=$(virtualenv_name)
     local gemset=$(gem_set_name)
     local gitprompt=$(git_prompt)
     local env_name=`join "." $venv $gemset`
-    # local stashprompt=$(colorize $sky_blue $(prepend_if '#' $stashprompt))
-    local joined=`join "$dark_grey|$gitcolor" $env_name $gitprompt$stashprompt`
+    local joined=`join "$dark_grey|$gitcolor" $env_name ${gitprompt}${stashprompt}`
     local bracketed=$(colorize $gitcolor "`append_if ' ' $(bracket_if $joined)`")
 
     local userhost=$(colorize $brown "\u${host_color}@\h")
