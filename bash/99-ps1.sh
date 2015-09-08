@@ -23,7 +23,7 @@ local light_cyan="\[\033[1;36m\]"
 local light_blue="\[\033[1;34m\]"
 local light_green="\[\033[1;32m\]"
 local light_red="\[\033[1;31m\]"
-local light_purple="\[\033[1;35m\]"
+local light_purple="\[\033[38;5;183m\]"
 local light_grey="\[\033[0;37m\]"
 local orange="\[\033[38;5;208m\]"
 
@@ -133,10 +133,16 @@ blank_if_zero() {
     fi
 }
 
-    if [[ $TERM =~ "256color"  ]]; then
-        host_color="\[\033[38;5;$((16 + $(hostname | cksum | cut -c1-3) % 216))m\]";
+    declare -A host_colors
+    host_colors=([jdhillon-x1]=$light_purple)
+    if [[ ${host_colors[$HOSTNAME]} ]]; then
+        host_color=${host_colors[$HOSTNAME]}
     else
-        host_color="\[\033[1;$((31 + $(hostname | cksum | cut -c1-3) % 6))m\]";
+        if [[ $TERM =~ "256color"  ]]; then
+            host_color="\[\033[38;5;$((16 + $(hostname | cksum | cut -c1-3) % 216))m\]";
+        else
+            host_color="\[\033[1;$((31 + $(hostname | cksum | cut -c1-3) % 6))m\]";
+        fi
     fi
 
     declare -A awshash
