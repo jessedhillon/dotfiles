@@ -1,3 +1,7 @@
+Host *.grandroundshealth.com
+  ForwardAgent yes
+  User ubuntu
+
 Host *.grandrounds.com
   ForwardAgent yes
   User ubuntu
