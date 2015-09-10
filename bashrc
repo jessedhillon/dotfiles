@@ -171,6 +171,3 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 joined="$( printf " && %s" "${PROMPT_COMMANDS[@]}" )"
 PROMPT_COMMAND="${joined:4}"
 $PROMPT_COMMAND
-
-# set vi mode
-set -o vi
