@@ -154,14 +154,6 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-# grnds
-export GR_USERNAME=jesse.dhillon
-export GR_HOME=~/Devel
-
-if [ -d "${GR_HOME}/engineering" ]; then
-    PATH="${GR_HOME}/engineering/bin:${PATH}"
-fi
-
 # rvm
 [[ -s "$HOME/.rvm/scripts/rvm"  ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session as a function
 
