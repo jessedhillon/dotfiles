@@ -138,9 +138,9 @@ fi
 PROMPT_COMMANDS=()
 
 # source other bash things
-if [ -d $HOME/.bash ]; then
-    for f in $HOME/.bash/*; do
-        source $f
+if [ -d $HOME/.bash.d ]; then
+    for sh in $HOME/.bash.d/*.sh; do
+        source $sh
     done
 fi
 
