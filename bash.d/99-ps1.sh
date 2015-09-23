@@ -147,7 +147,7 @@ blank_if_zero() {
     fi
 
     declare -A awshash
-    awshash=([production]=prod [development]=dev [uat]=uat)
+    awshash=([production]=prod [development]=dev [uat]=uat [integration2]=i2 [integration3]=i3)
     awsenv=""
     if [[ $AWS_ENVIRONMENT && ${awshash[$AWS_ENVIRONMENT]} ]]; then
         awsenv=${awshash[$AWS_ENVIRONMENT]}
