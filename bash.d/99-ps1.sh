@@ -15,6 +15,7 @@ local white="\[\033[1;37m\]"
 local positive_green="\[\033[38;5;64m\]"
 local lime="\[\033[38;5;148m\]"
 local pale_green="\[\033[38;5;191m\]"
+local electric_blue="\[\033[38;5;39m\]"
 local sky_blue="\[\033[38;5;81m\]"
 local scarlet="\[\033[38;5;9m\]"
 local dark_grey="\[\033[38;5;238m\]"
@@ -161,7 +162,7 @@ blank_if_zero() {
     if [[ $gs == "modified" ]]; then
         gitcolor=$scarlet
     elif [[ $gs == "untracked" ]]; then
-        gitcolor=$sky_blue
+        gitcolor=$electric_blue
     else
         gitcolor=$positive_green
     fi
