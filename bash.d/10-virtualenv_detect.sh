@@ -6,8 +6,10 @@ function venv_prompt()
       VENV=$(cat ${DIR}/.virtualenv)
       if [ -z "$VIRTUAL_ENV" ]; then
           workon `cat ${DIR}/.virtualenv`
+          wait $!
       elif [ "$(basename $VIRTUAL_ENV)" != "$VENV" ]; then
           workon `cat ${DIR}/.virtualenv`
+          wait $!
       fi
       break
     fi
@@ -15,6 +17,7 @@ function venv_prompt()
     if [ "$DIR" == "/" ]; then
       if [ -n "$VIRTUAL_ENV" ]; then
         deactivate
+        wait $!
       fi
       break
     fi
