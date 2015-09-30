@@ -28,7 +28,8 @@ local light_purple="\[\033[38;5;183m\]"
 local light_grey="\[\033[0;37m\]"
 local orange="\[\033[38;5;208m\]"
 
-local warning="\[\033[38;5;195m\]\[\033[48;5;196m\]"
+local warning="\[\033[1;30m\]\[\033[48;5;208m\]"
+local danger="\[\033[38;5;195m\]\[\033[48;5;196m\]"
 local off="\[\033[0m\]"
 
 angle_if() {
@@ -152,7 +153,7 @@ blank_if_zero() {
     if [[ $AWS_ENVIRONMENT && ${awshash[$AWS_ENVIRONMENT]} ]]; then
         awsenv=${awshash[$AWS_ENVIRONMENT]}
         if [[ $awsenv == "prod" ]]; then
-            awscolor=$warning
+            awscolor=$danger
         else
             awscolor=$lavender
         fi
@@ -171,7 +172,16 @@ blank_if_zero() {
 
     local venv=$(virtualenv_name)
     local gemset=$(gem_set_name)
-    local gitprompt=$(git_prompt)
+    local branchname=$(git_prompt)
+
+    if [[ $branchname == *"|"* ]]; then
+        local gitstate=$(colorize $orange ^$(echo $branchname | cut -d'|' -f2))${gitcolor}
+        local branchname=$(echo $branchname | cut -d'|' -f1)
+        local gitprompt=${branchname}${gitstate}
+    else
+        local gitprompt=$branchname
+    fi
+
     local env_name=`join "." $venv $gemset`
     local joined=`join "$dark_grey|$gitcolor" $env_name ${gitprompt}${stashprompt}`
     local bracketed=$(colorize $gitcolor "`append_if ' ' $(bracket_if $joined)`")
