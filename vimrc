@@ -91,6 +91,10 @@ set softtabstop=0
 set wildmenu
 set wildignore=*.pyc,*.swp,*.swo,*.egg-info/
 
+" remap colon
+map ` :
+map ; :
+
 " window navigation
 nmap <space> <c-W>w
 nmap <c-j> <C-W>j<C-W>_
@@ -107,6 +111,7 @@ vmap <s-tab> <gv
 nmap t% :tabedit %<CR>
 nmap t- :tabclose<CR>
 nmap t+ :tabnew<CR>
+nmap t= :tabnew<CR>
 nmap tt :tabs<CR>
 
 map <c-l> :tabnext<CR>
