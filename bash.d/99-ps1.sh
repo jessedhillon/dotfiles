@@ -72,9 +72,9 @@ stash_length() {
 }
 
 git_status() {
-    if [[ $(git st -s 2> /dev/null | grep -e "^\s*[DM]" | wc -l) != "0" ]]; then
+    if [[ $(git st -s 2> /dev/null | grep -e "^\s*[DM]" | wc -l | awk '{ print $1 }') != "0" ]]; then
         echo "modified"
-    elif [[ $(git st --porcelain 2> /dev/null | wc -l) != "0" ]]; then
+    elif [[ $(git st --porcelain 2> /dev/null | wc -l | awk '{ print $1 }') != "0" ]]; then
         echo "untracked"
     else
         echo "clean"
