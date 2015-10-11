@@ -12,8 +12,8 @@ set t_Co=256
 set modeline
 set nofoldenable
 set nowrap
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible  " be iMproved, required
+filetype off  " required
 
 " temp dir
 set directory=/tmp//,.
@@ -21,6 +21,7 @@ set directory=/tmp//,.
 " set shift, tab width
 set ts=4
 set sw=4
+set sts=0  " fuck soft tabs
 set et
 
 " syntax & highlighting
@@ -80,12 +81,9 @@ endif
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType python,javascript,ruby,htmljinja,css,scss set number
-au FileType ruby,htmljinja,html,scss,css set ts=2
-au FileType ruby,htmljinja,html,scss,css set sw=2
+au FileType python set ts=4 sw=4 sts=0 et
+au FileType ruby,htmljinja,html,scss,css set ts=2 sw=2 sts=0
 au FileType scss set iskeyword+=-
-
-" some ft plugins set softtabstop (e.g. python)
-set softtabstop=0
 
 " wildmenu
 set wildmenu
