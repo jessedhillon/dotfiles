@@ -1,7 +1,3 @@
-Host *
-  ForwardAgent yes
-  User ubuntu
-
 Host *.grandroundshealth.com
   ForwardAgent yes
   User ubuntu
@@ -25,3 +21,11 @@ Host pitandpug.com
   IdentityFile ~/.ssh/jessedhillon-bonanza.pem
   User ubuntu
   ForwardAgent yes
+
+Host vesta.local
+  ForwardAgent yes
+  User jesse
+
+Host *
+  ForwardAgent yes
+  User ubuntu
