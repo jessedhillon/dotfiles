@@ -8,6 +8,7 @@
     st = status
     ci = commit --verbose
     co = checkout
+    cp = cherry-pick
     br = branch
     ls = show --pretty=\"format:%h %s (%cn, %ar)\n-------\" --name-status
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
