@@ -117,7 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 # vim
-EDITOR=vim
+export EDITOR=vim
 
 # completions
 if [ -d $HOME/.completions.d ]; then
