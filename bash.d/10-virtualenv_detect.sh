@@ -5,10 +5,10 @@ function venv_prompt()
     if [ -e "${DIR}/.virtualenv" ]; then
       VENV=$(cat ${DIR}/.virtualenv)
       if [ -z "$VIRTUAL_ENV" ]; then
-          workon `cat ${DIR}/.virtualenv`
+          workon `cat "${DIR}/.virtualenv"`
           wait $!
       elif [ "$(basename $VIRTUAL_ENV)" != "$VENV" ]; then
-          workon `cat ${DIR}/.virtualenv`
+          workon `cat "${DIR}/.virtualenv""`
           wait $!
       fi
       break
@@ -22,7 +22,7 @@ function venv_prompt()
       break
     fi
 
-    DIR=$(dirname $DIR)
+    DIR=$(dirname "${DIR}")
   done
 }
 
