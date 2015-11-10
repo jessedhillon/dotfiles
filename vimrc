@@ -49,6 +49,7 @@ Plugin 'wincent/command-t'
 Plugin 'jessedhillon/vim-easycomment'
 Plugin 'vim-scripts/sudo.vim'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'rking/ag.vim'
 
 call vundle#end()            " required
 
@@ -130,6 +131,9 @@ set timeoutlen=200 ttimeoutlen=0
 " insert single character
 nnoremap <silent> s :exec "normal i".nr2char(getchar())."\e"<CR>
 nnoremap <silent> S :exec "normal a".nr2char(getchar())."\e"<CR>
+
+" Ag configuration
+nmap <C-S-F> :Ag 
 
 " commenting / uncommenting visually selected text
 vmap <silent> <C-_> :call ToggleCommentVisual()<CR>
