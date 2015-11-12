@@ -51,6 +51,7 @@ Plugin 'vim-scripts/sudo.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'ledger/vim-ledger'
 
 call vundle#end()            " required
 
@@ -96,7 +97,6 @@ set wildignore=*.pyc,*.swp,*.swo,*.egg-info/
 
 " remap colon
 map ` :
-map ; :
 
 " window navigation
 nmap <space> <c-W>w
