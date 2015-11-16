@@ -133,7 +133,9 @@ nnoremap <silent> s :exec "normal i".nr2char(getchar())."\e"<CR>
 nnoremap <silent> S :exec "normal a".nr2char(getchar())."\e"<CR>
 
 " Ag configuration
-nmap <C-S-F> :Ag 
+nmap <c-s-f> :Ag 
+nmap <c-s-g> yiw<ESC>:Ag <c-r>0
+vmap <c-s-g> y<ESC>:Ag "<c-r>0"
 
 " commenting / uncommenting visually selected text
 vmap <silent> <C-_> :call ToggleCommentVisual()<CR>
