@@ -50,6 +50,7 @@ Plugin 'jessedhillon/vim-easycomment'
 Plugin 'vim-scripts/sudo.vim'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'rking/ag.vim'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()            " required
 
