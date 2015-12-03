@@ -199,4 +199,8 @@ blank_if_zero() {
     export PS1="${timestamp} ${awsenv}${bracketed}${userhost}${jobscount}${dark_grey}:${dirscount}${cwd}${prompt}${off} "
 }
 
-PROMPT_COMMANDS=(${PROMPT_COMMANDS[@]} '_update_ps1')
+_update_title () {
+    echo -ne "\033]0;${HOSTNAME}:${PWD}\007"
+}
+
+PROMPT_COMMANDS=(${PROMPT_COMMANDS[@]} '_update_ps1' '_update_title')
