@@ -80,6 +80,9 @@ elseif(&background == "dark")
     highlight ColorColumn ctermbg=0
 endif
 
+" title
+autocmd BufEnter * let &titlestring = expand("%:t")
+
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType python,javascript,ruby,htmljinja,css,scss set number
