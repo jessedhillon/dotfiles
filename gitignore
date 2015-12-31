@@ -3,4 +3,7 @@
 *.egg-info
 .coverage
 *.log
+node_modules
+bower_components
 MANIFEST.in
+.ropeproject
