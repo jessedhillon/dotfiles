@@ -75,7 +75,6 @@ set background=dark
 colorscheme solarized
 
 " column length control
-let &colorcolumn="80,".join(range(99,999),",")
 if(&background == "light")
     highlight ColorColumn ctermbg=LightGray
 elseif(&background == "dark")
@@ -87,6 +86,8 @@ autocmd BufEnter * let &titlestring = expand("%:t")
 
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
+au FileType * let &colorcolumn=""
+au FileType python let &colorcolumn="80,".join(range(99,999),",")
 au FileType python,javascript,typescript,ruby,htmljinja,css,scss set number
 au FileType python set ts=4 sw=4 sts=0 et
 au FileType ruby,htmljinja,html,scss,css,ledger,javascript,typescript set ts=2 sw=2 sts=0
