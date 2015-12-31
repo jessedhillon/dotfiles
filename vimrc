@@ -52,6 +52,7 @@ Plugin 'kchmck/vim-coffee-script'
 Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ledger/vim-ledger'
+Plugin 'leafgarland/typescript-vim'
 
 call vundle#end()            " required
 
@@ -86,14 +87,14 @@ autocmd BufEnter * let &titlestring = expand("%:t")
 
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
-au FileType python,javascript,ruby,htmljinja,css,scss set number
+au FileType python,javascript,typescript,ruby,htmljinja,css,scss set number
 au FileType python set ts=4 sw=4 sts=0 et
-au FileType ruby,htmljinja,html,scss,css set ts=2 sw=2 sts=0
+au FileType ruby,htmljinja,html,scss,css,ledger,javascript,typescript set ts=2 sw=2 sts=0
 au FileType scss set iskeyword+=-
 
 " wildmenu
 set wildmenu
-set wildignore=*.pyc,*.swp,*.swo,*.egg-info/
+set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,node_modules/**,bower_components/**
 
 " remap colon
 map ` :
@@ -145,8 +146,11 @@ vmap <c-s-g> y<ESC>:Ag "<c-r>0"
 vmap <silent> <C-_> :call ToggleCommentVisual()<CR>
 nmap <silent> <C-_> :call ToggleCommentLine()<CR>
 
-au FileType scss let b:comment_style="inline"
-au FileType scss let b:comment_opener="//"
+au FileType scss,javascript,typescript let b:comment_style="inline"
+au FileType scss,javascript,typescript let b:comment_opener="//"
 
 au FileType yaml let b:comment_style="inline"
 au FileType yaml let b:comment_opener="#"
+
+au FileType ledger let b:comment_style="inline"
+au FileType ledger let b:comment_opener=";"
