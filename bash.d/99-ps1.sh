@@ -200,7 +200,32 @@ blank_if_zero() {
 }
 
 _update_title () {
-    echo -ne "\033]0;${HOSTNAME}:${PWD}\007"
+    if [ "$BASH_COMMAND" == '_update_ps1' ]; then
+        title=$PWD
+    elif [ "$1" ]; then
+        title=$@
+    else
+        title=$BASH_COMMAND
+    fi
+    printf "\e]0;%s\007" "$title"
 }
 
-PROMPT_COMMANDS=(${PROMPT_COMMANDS[@]} '_update_ps1' '_update_title')
+foreground() {
+    extglob_state=$(shopt -p extglob)
+    shopt -s extglob
+    case "$1" in
+        [0-9]*([0-9]))
+            jobname=$(jobs | grep -e "^\[$1\]" | awk '{$1=$2=""; print $0}');;
+        +|-)
+            jobname=$(jobs | grep -e "^\[[[:digit:]]\+\]$1" | awk '{$1=$2=""; print $0}');;
+        *)
+            jobname=$(jobs | grep -e "^\[[[:digit:]]\+\]+" | awk '{$1=$2=""; print $0}');;
+    esac
+    $extglob_state
+    _update_title ${jobname##*( )}
+    \fg $1
+}
+alias fg=foreground
+
+PROMPT_COMMANDS=(${PROMPT_COMMANDS[@]} '_update_ps1')
+trap '_update_title' DEBUG
