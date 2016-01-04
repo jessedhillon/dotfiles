@@ -83,6 +83,7 @@ endif
 
 " title
 autocmd BufEnter * let &titlestring = expand("%:t")
+set title
 
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
