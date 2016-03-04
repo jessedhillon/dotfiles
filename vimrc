@@ -97,7 +97,7 @@ au FileType scss set iskeyword+=-
 
 " wildmenu
 set wildmenu
-set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,node_modules/**,bower_components/**
+set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,node_modules/**,bower_components/**,**/vcr_cassettes/**
 
 " remap colon
 map ` :
