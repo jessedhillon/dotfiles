@@ -66,6 +66,7 @@ endif
 
 " powerline
 let g:Powerline_symbols = 'fancy'
+set laststatus=2
 
 " solarized
 syntax enable
