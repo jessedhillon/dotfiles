@@ -31,7 +31,7 @@ map <silent> <c-L> :redraw<CR>:syn sync fromstart<CR>
 set smartindent
 set incsearch
 set hlsearch
- 
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -53,6 +53,7 @@ Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ledger/vim-ledger'
 Plugin 'leafgarland/typescript-vim'
+Plugin 'duganchen/vim-soy'
 
 call vundle#end()            " required
 
@@ -63,10 +64,14 @@ if &term =~ "xterm" || &term =~ "screen"
     let g:CommandTSelectNextMap = ['<C-j>', '<ESC>OB']
     let g:CommandTSelectPrevMap = ['<C-k>', '<ESC>OA']
 endif
+let g:CommandTMaxHeight = 0
 
 " powerline
 let g:Powerline_symbols = 'fancy'
 set laststatus=2
+
+" match trailing whitespace
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 
 " solarized
 syntax enable
@@ -74,6 +79,8 @@ filetype off
 filetype plugin indent on
 set background=dark
 colorscheme solarized
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 " column length control
 if(&background == "light")
@@ -97,7 +104,7 @@ au FileType scss set iskeyword+=-
 
 " wildmenu
 set wildmenu
-set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,node_modules/**,bower_components/**,**/vcr_cassettes/**
+set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,node_modules/**,bower_components/**,**/vcr_cassettes/**,**/node_modules/**,node-package/**,out/**
 
 " remap colon
 map ` :
