@@ -6,16 +6,22 @@
 
 [alias]
     st = status
-    ci = commit --verbose
+    ci = commit -S --verbose
     co = checkout
     cp = cherry-pick
     br = branch
-    ls = show --pretty=\"format:%h %s (%cn, %ar)\n-------\" --name-status
+    ls = log --pretty=\"format:%h %s (%cn, %ar)\n-------\" --name-status
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     unstage = reset HEAD
     current = rev-parse --abbrev-ref HEAD
 [user]
-    email = jesse.dhillon@grandroundshealth.com
+    email = jesse@dhillon.com
     name = Jesse Dhillon
 [push]
 	default = simple
+
+[hub]
+protocol = ssh
+
+[rebase]
+	autosquash = true
