@@ -214,7 +214,7 @@ foreground() {
     extglob_state=$(shopt -p extglob)
     shopt -s extglob
     case "$1" in
-        [0-9]*([0-9]))
+        [0-9]*[0-9])
             jobname=$(jobs | grep -e "^\[$1\]" | awk '{$1=$2=""; print $0}');;
         +|-)
             jobname=$(jobs | grep -e "^\[[[:digit:]]\+\]$1" | awk '{$1=$2=""; print $0}');;
