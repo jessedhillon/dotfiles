@@ -45,7 +45,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Bundle 'slim-template/vim-slim.git'
 Plugin 'mitsuhiko/vim-jinja'
-Plugin 'wincent/command-t'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'jessedhillon/vim-easycomment'
 Plugin 'vim-scripts/sudo.vim'
 Plugin 'kchmck/vim-coffee-script'
@@ -53,18 +53,22 @@ Plugin 'rking/ag.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'ledger/vim-ledger'
 Plugin 'leafgarland/typescript-vim'
-Plugin 'duganchen/vim-soy'
+Plugin 'mxw/vim-jsx'
+Plugin 'editorconfig/editorconfig-vim'
 
 call vundle#end()            " required
 
+" status
+set laststatus=2
+
 " command-t
-map <silent> <C-T> :CommandT<CR>
-if &term =~ "xterm" || &term =~ "screen"
-    let g:CommandTCancelMap = ['<ESC>', '<C-c>']
-    let g:CommandTSelectNextMap = ['<C-j>', '<ESC>OB']
-    let g:CommandTSelectPrevMap = ['<C-k>', '<ESC>OA']
-endif
-let g:CommandTMaxHeight = 0
+map <silent> <C-P> :CtrlP
+map <silent> <C-S-P> :CtrlPBuffer
+augroup CommandTExtension
+    autocmd!
+    autocmd FocusGained * CtrlPClearCache
+    autocmd BufWritePost * CtrlPClearCache
+augroup END
 
 " powerline
 let g:Powerline_symbols = 'fancy'
@@ -72,6 +76,9 @@ set laststatus=2
 
 " match trailing whitespace
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+
+" jsx
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " solarized
 syntax enable
@@ -97,14 +104,14 @@ set title
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType * let &colorcolumn=""
 au FileType python let &colorcolumn="80,".join(range(99,999),",")
-au FileType python,javascript,typescript,ruby,htmljinja,css,scss set number
+au FileType python,java,javascript,typescript,ruby,htmljinja,css,scss,yaml set number
 au FileType python set ts=4 sw=4 sts=0 et
-au FileType ruby,htmljinja,html,scss,css,ledger,javascript,typescript set ts=2 sw=2 sts=0
+au FileType ruby,htmljinja,html,yaml,scss,css,ledger,javascript,typescript,soy set ts=2 sw=2 sts=0
 au FileType scss set iskeyword+=-
 
 " wildmenu
 set wildmenu
-set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,node_modules/**,bower_components/**,**/vcr_cassettes/**,**/node_modules/**,node-package/**,out/**
+set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,node_modules/**,bower_components/**,tmp/**,dist/**,build/**
 
 " remap colon
 map ` :
