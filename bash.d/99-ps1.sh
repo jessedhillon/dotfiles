@@ -186,7 +186,11 @@ blank_if_zero() {
     local joined=`join "$dark_grey|$gitcolor" $env_name ${gitprompt}${stashprompt}`
     local bracketed=$(colorize $gitcolor "`append_if ' ' $(bracket_if $joined)`")
 
-    local userhost=$(colorize $brown "\u${host_color}@\h")
+    if [[ $USER == "root" ]]; then
+        local userhost=$(colorize $light_red "\u${off}${host_color}@\h")
+    else
+        local userhost=$(colorize $brown "\u${host_color}@\h")
+    fi
     local cwd=$(colorize $cyan "\w")
     local prompt=$(colorize $cyan '>')
 
