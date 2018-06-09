@@ -13,7 +13,8 @@
     ls = log --pretty=\"format:%h %s (%cn, %ar)\n-------\" --name-status
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     unstage = reset HEAD
-    current = rev-parse --abbrev-ref HEAD
+    current-branch = rev-parse --abbrev-ref HEAD
+    cb = rev-parse --abbrev-ref HEAD
 [user]
     email = jesse@dhillon.com
     name = Jesse Dhillon
