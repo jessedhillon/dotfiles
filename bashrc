@@ -119,6 +119,9 @@ fi
 # vim
 export EDITOR=vim
 
+# less
+export LESS="-S"
+
 # completions
 if [ -d $HOME/.completions.d ]; then
     for f in $HOME/.completions.d/*; do
@@ -144,9 +147,6 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     export PROJECT_HOME=$HOME/Devel
     source /usr/local/bin/virtualenvwrapper.sh
 fi
-
-# rvm
-[[ -s "$HOME/.rvm/scripts/rvm"  ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session as a function
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
