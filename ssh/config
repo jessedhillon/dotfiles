@@ -1,3 +1,5 @@
+PubkeyAcceptedKeyTypes +ssh-dss
+
 Host *.grandroundshealth.com
   ForwardAgent yes
   User ubuntu
@@ -13,6 +15,9 @@ Host *.uat
 Host deva0.net
   User deva0
 
+Host jesse.bio
+  User deva0
+
 Host *.amazonaws.com
   IdentityFile ~/.ssh/jessedhillon-bonanza.pem
   ForwardAgent yes
@@ -25,7 +30,3 @@ Host pitandpug.com
 Host vesta.local
   ForwardAgent yes
   User jesse
-
-Host *
-  ForwardAgent yes
-  User ubuntu
