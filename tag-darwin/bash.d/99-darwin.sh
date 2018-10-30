@@ -1,21 +1,24 @@
 if [[ $OSTYPE =~ ^darwin ]]; then
-    if [ -f /usr/local/etc/bash_completion ]; then
-        . /usr/local/etc/bash_completion
+    export PATH=/opt/local/bin:$PATH
+
+    if [ -f /opt/local/etc/bash_completion ]; then
+        . /opt/local/etc/bash_completion
     fi
 
-    if [ -f /usr/local/git/contrib/completion/git-completion.bash ]; then
-        . /usr/local/git/contrib/completion/git-completion.bash
-    elif [ -f $(xcode-select -p)/usr/share/git-core/git-completion.bash ]; then
-        . $(xcode-select -p)/usr/share/git-core/git-completion.bash
+    if [ -f /opt/local/share/git/contrib/completion/git-completion.bash ]; then
+        . /opt/local/share/git/contrib/completion/git-completion.bash
     fi
 
-    if [ -f $(xcode-select -p)/usr/share/git-core/git-prompt.sh ]; then
-        . $(xcode-select -p)/usr/share/git-core/git-prompt.sh
+    if [ -f /opt/local/share/git/contrib/completion/git-prompt.sh ]; then
+        . /opt/local/share/git/contrib/completion/git-prompt.sh
     fi
 
     alias ls="ls -h -G"
-    alias vim="mvim -v"
-    if [ -x /Applications/Xcode.app/Contents/Developer/usr/bin/git ]; then
-        alias git="/Applications/Xcode.app/Contents/Developer/usr/bin/git"
-    fi
+fi
+
+if [ -f /opt/local/bin/virtualenvwrapper.sh-3.6 ]; then
+    export VIRTUALENVWRAPPER_PYTHON='/opt/local/bin/python3.6'
+    export VIRTUALENVWRAPPER_VIRTUALENV='/opt/local/bin/virtualenv-3.6'
+    export VIRTUALENVWRAPPER_VIRTUALENV_CLONE='/opt/local/bin/virtualenv-clone-3.6'
+    source /opt/local/bin/virtualenvwrapper.sh-3.6
 fi
