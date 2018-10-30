@@ -103,7 +103,7 @@ set title
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType * let &colorcolumn=""
-au FileType python let &colorcolumn="80,".join(range(99,999),",")
+au FileType python,javascript,typescript let &colorcolumn="80,".join(range(99,999),",")
 au FileType python,java,javascript,typescript,ruby,htmljinja,css,scss,yaml set number
 au FileType python set ts=4 sw=4 sts=0 et
 au FileType ruby,htmljinja,html,yaml,scss,css,ledger,javascript,typescript,soy set ts=2 sw=2 sts=0
@@ -111,7 +111,7 @@ au FileType scss set iskeyword+=-
 
 " wildmenu
 set wildmenu
-set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,node_modules/**,bower_components/**,tmp/**,dist/**,build/**
+set wildignore=*.pyc,*.swp,*.swo,*.egg-info/,**/node_modules/**,node_modules/**,bower_components/**,tmp/**,dist/**,build/**,**/build/**
 
 " remap colon
 map ` :
