@@ -155,5 +155,8 @@ joined="$( printf " && %s" "${PROMPT_COMMANDS[@]}" )"
 PROMPT_COMMAND="${joined:4}"
 $PROMPT_COMMAND
 
+# gpg
+export GPG_TTY=$(tty)
+
 # job control notifications
 set -b
