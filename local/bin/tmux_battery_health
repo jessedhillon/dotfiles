@@ -30,7 +30,7 @@ darwin_get_bat ()
 {
     IFS=$(echo -en "\n\b") read -r battline <<< $(pmset -g batt)
     drawing_from=$(echo $battline | sed -E "s/^Now drawing from '(.*)'.*/\1/")
-    Ratio=$(echo $battline | sed -E "s/.* ([[:digit:]][[:digit:]]?[[:digit:]])%.*/\1/")
+    Ratio=$(echo $battline | sed -E "s/.* ([[:digit:]]?[[:digit:]]?[[:digit:]])%.*/\1/")
     case $drawing_from in
         "Battery Power")
             Connected=false;;
@@ -55,7 +55,8 @@ lightning_bolt()
 {
     case $(uname -s) in
         "Linux")
-            echo -n "#[bold]⚡#[nobold] "
+            # #[bold]⚡#[nobold] 
+            echo -en '#[bold]\u26A1\uff0e#[nobold]'
             ;;
         "Darwin")
             # ⌁ is another option
@@ -83,7 +84,6 @@ else
         else
             lightning_bolt
         fi
-        echo -n " "
     else
         echo -n "${tick} "
     fi
