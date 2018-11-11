@@ -2,13 +2,13 @@
 
 format_pct()
 {
-    printf "%.0f" $(echo "scale=2;100 * ${Charge}/${Capacity} 0.2" | bc)
+    printf "%3.0f" $(echo "scale=2;100 * ${Charge}/${Capacity} + 0.2" | bc)
 }
 
 linux_get_bat ()
 {
     batpath=${batpath:-/sys/class/power_supply/BAT0}
-    status=$batpath/status
+    status=${batpath}/status
     if [ -f "$batpath/energy_full" ]; then
         naming="energy"
     elif [ -f "$batpath/charge_full" ]; then
@@ -16,13 +16,15 @@ linux_get_bat ()
     fi
     Capacity=$(cat ${batpath}/${naming}_full)
     Charge=$(cat ${batpath}/${naming}_now)
-    status=$(cat $BATPATH/status)
+    status=$(cat $batpath/status)
 
     Connected=false
-    if [ "$status" = "Yes" ]; then
-        connected=true
+    if [ "$status" = "Charging" ]; then
+        Connected=true
     fi
     Ratio=$(format_pct)
+
+    echo $status
 }
 
 
@@ -55,12 +57,20 @@ lightning_bolt()
 {
     case $(uname -s) in
         "Linux")
-            # #[bold]⚡#[nobold] 
-            echo -en '#[bold]\u26A1\uff0e#[nobold]'
+            # #[bold]⚡#[nobold]
+            if [ "$1" = true ]; then
+                echo -en '#[bold]🗲 #[nobold]'
+            else
+                echo -en '#[bold]  #[nobold]'
+            fi
             ;;
         "Darwin")
             # ⌁ is another option
-            echo -n "#[bold]ᛋ#[nobold] "
+            if [ "$1" = true ]; then
+                echo -n "#[bold]ᛋ#[nobold] "
+            else
+                echo -en '#[bold] #[nobold]'
+            fi
             ;;
     esac
 }
@@ -80,9 +90,9 @@ else
         # flash the icon for 2 out of 6 seconds
         m=$(expr `date +"%S"` % 6)
         if [ "$m" -lt 2 ]; then
-            echo -n " "
+            lightning_bolt false
         else
-            lightning_bolt
+            lightning_bolt true
         fi
     else
         echo -n "${tick} "
