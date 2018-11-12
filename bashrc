@@ -59,9 +59,9 @@ if [ -n "$force_color_prompt" ]; then
 	# We have color support; assume it's compliant with Ecma-48
 	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -148,8 +148,6 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
 # construct PROMPT_COMMAND
 joined="$( printf " && %s" "${PROMPT_COMMANDS[@]}" )"
 PROMPT_COMMAND="${joined:4}"
@@ -160,3 +158,7 @@ export GPG_TTY=$(tty)
 
 # job control notifications
 set -b
+
+# gnome
+export GTK_IM_MODULE="gtk-im-context-simple"
+export GTK_IM_MODULE="xim"
