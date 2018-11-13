@@ -136,7 +136,7 @@ blank_if_zero() {
 }
 
     declare -A host_colors
-    host_colors=([jdhillon-x1]=$light_purple [claudius]=$light_purple)
+    host_colors=([jdhillon-x1]=$light_purple [claudius]=$light_purple [jdhillon-mbp.local]=$purple)
     if [[ ${host_colors[$HOSTNAME]} ]]; then
         host_color=${host_colors[$HOSTNAME]}
     else
