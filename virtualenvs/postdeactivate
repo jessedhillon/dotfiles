@@ -2,5 +2,5 @@
 # This hook is sourced after every virtualenv is deactivated.
 
 if [ -n "$VIRTUALENV_OLDPATH" ]; then
-    PATH="$VIRTUALENV_OLDPATH"
+    PATH=$(echo $VIRTUALENV_OLDPATH | cut -d: -f2-)
 fi
