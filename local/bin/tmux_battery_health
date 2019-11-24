@@ -59,9 +59,9 @@ lightning_bolt()
         "Linux")
             # #[bold]⚡#[nobold]
             if [ "$1" = true ]; then
-                echo -en '#[bold]🗲 #[nobold]'
+                echo -en '#[bold] #[nobold] '
             else
-                echo -en '#[bold]  #[nobold]'
+                echo -en '#[bold]🗲#[nobold] '
             fi
             ;;
         "Darwin")
@@ -69,7 +69,7 @@ lightning_bolt()
             if [ "$1" = true ]; then
                 echo -n "#[bold]ᛋ#[nobold] "
             else
-                echo -en '#[bold] #[nobold]'
+                echo -en '#[bold] #[nobold] '
             fi
             ;;
     esac
@@ -90,9 +90,9 @@ else
         # flash the icon for 2 out of 6 seconds
         m=$(expr `date +"%S"` % 6)
         if [ "$m" -lt 2 ]; then
-            lightning_bolt false
-        else
             lightning_bolt true
+        else
+            lightning_bolt false
         fi
     else
         echo -n "${tick} "
