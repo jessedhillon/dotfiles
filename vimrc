@@ -123,6 +123,12 @@ nmap <c-k> <C-W>k<C-W>_
 nmap <s-j> :res -5<CR>
 nmap <s-k> :res +5<CR>
 
+" navigate apparent lines
+nnoremap k gk
+nnoremap j gj
+inoremap <C-k> <C-o>gk
+inoremap <C-j> <C-o>gj
+
 " unshift
 imap <s-tab> <c-d>
 vmap <tab> >gv
