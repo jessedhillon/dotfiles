@@ -55,6 +55,8 @@ Plugin 'ledger/vim-ledger'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'ap/vim-css-color'
+Plugin 'digitaltoad/vim-pug'
 
 call vundle#end()            " required
 
@@ -177,3 +179,9 @@ au FileType yaml let b:comment_opener="#"
 
 au FileType ledger let b:comment_style="inline"
 au FileType ledger let b:comment_opener=";"
+
+" markdown syntax
+au FileType markdown syn region markdownCode matchgroup=markdownCodeDelimiter start="{:" end="}" keepend contains=.*
+
+" spelling
+hi SpellBad cterm=underline
