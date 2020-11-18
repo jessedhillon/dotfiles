@@ -126,10 +126,16 @@ nmap <s-j> :res -5<CR>
 nmap <s-k> :res +5<CR>
 
 " navigate apparent lines
-nnoremap k gk
 nnoremap j gj
-inoremap <C-k> <C-o>gk
-inoremap <C-j> <C-o>gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
 
 " unshift
 imap <s-tab> <c-d>
