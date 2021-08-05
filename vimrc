@@ -36,11 +36,13 @@ set hlsearch
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+let g:AutoPairsShortcutFastWrap = '<C-S-E>'
+
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
 Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'jiangmiao/auto-pairs'
+"Plugin 'jiangmiao/auto-pairs'
 Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Bundle 'slim-template/vim-slim.git'
