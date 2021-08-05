@@ -61,7 +61,8 @@ lightning_bolt()
             if [ "$1" = true ]; then
                 echo -en '#[bold] #[nobold] '
             else
-                echo -en '#[bold]🗲#[nobold] '
+                # echo -n "#[bold]ϟ#[nobold] "
+                echo -n "#[bold]ᛋ#[nobold] "
             fi
             ;;
         "Darwin")
