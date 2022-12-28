@@ -27,3 +27,7 @@ Host *.amazonaws.com
 
 Host *.usebasis.co
   IdentitiesOnly yes
+
+Host github.com
+  HostName github.com
+  IdentityFile ~/.ssh/id_rsa
