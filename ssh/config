@@ -18,15 +18,12 @@ Host deva0.net
 Host jesse.bio
   User deva0
 
-Host *.amazonaws.com
-  IdentityFile ~/.ssh/jessedhillon-bonanza.pem
-  ForwardAgent yes
-
-Host pitandpug.com
-  IdentityFile ~/.ssh/jessedhillon-bonanza.pem
-  User ubuntu
-  ForwardAgent yes
-
 Host vesta.local
   ForwardAgent yes
   User jesse
+
+Host *.amazonaws.com
+  IdentitiesOnly yes
+
+Host *.usebasis.co
+  IdentitiesOnly yes
