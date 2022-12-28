@@ -10,7 +10,7 @@
     co = checkout
     cp = cherry-pick
     br = branch
-    ls = log --pretty=\"format:%h %s (%cn, %ar)\n-------\" --name-status
+    ls = log --pretty=\"format:%h %s (%cn, %ah)\n-------\" --name-status
     hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     unstage = reset HEAD
     current-branch = rev-parse --abbrev-ref HEAD
@@ -26,3 +26,5 @@ protocol = ssh
 
 [rebase]
 	autosquash = true
+[init]
+	defaultBranch = master
