@@ -107,10 +107,10 @@ set title
 " autocommands for filetypes
 au BufRead,BufNewFile *.jinja2 set ft=htmljinja
 au FileType * let &colorcolumn=""
-au FileType python,javascript,typescript let &colorcolumn="80,".join(range(99,999),",")
-au FileType python,java,javascript,typescript,ruby,htmljinja,css,scss,yaml set number
+au FileType python,javascript,typescript let &colorcolumn="80,".join(range(140,999),",")
+au FileType python,java,javascript,typescript,c,cc,cpp,ruby,htmljinja,css,scss,yaml set number
 au FileType python set ts=4 sw=4 sts=0 et
-au FileType ruby,htmljinja,html,yaml,scss,css,ledger,javascript,typescript,soy set ts=2 sw=2 sts=0
+au FileType ruby,htmljinja,html,yaml,scss,css,c,cc,cpp,ledger,javascript,typescript,soy set ts=2 sw=2 sts=0
 au FileType scss set iskeyword+=-
 
 " wildmenu
@@ -138,6 +138,9 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
+
+" stay in same column traveling lines
+set nostartofline
 
 " unshift
 imap <s-tab> <c-d>
