@@ -1,0 +1,3 @@
+SHELL=/bin/sh
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+1	0	cron.user	run-parts --regex='.*\.sh' /home/jesse/Devel/dotfiles/local/etc/cron.daily
