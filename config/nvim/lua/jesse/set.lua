@@ -28,7 +28,7 @@ vim.opt.isfname:append('@-@')
 vim.opt.updatetime = 50
 vim.opt.colorcolumn = "120"
 
-vim.opt.completeopt = "menuone,noinsert,noselect"
+-- vim.opt.completeopt = "menuone,noinsert,noselect"
 
 -- stay in same column when traveling lines
 vim.opt.startofline = false
@@ -42,4 +42,14 @@ vim.cmd[[
     au FileType python set ts=4 sw=4 sts=0 et
     au FileType ruby,htmljinja,html,yaml,scss,css,c,cc,cpp,ledger,lua,javascript,typescript,soy set ts=2 sw=2 sts=0
     au FileType scss set iskeyword+=-
+    au FileType markdown set wrap lbr
+    au FileType markdown setlocal textwidth=120
+    " hack because cmp window.documentation = false config is not respected currently
+    au FileType * lua require('cmp.config').get().window.documentation = false
+]]
+
+-- catch trailing space
+vim.cmd[[
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 ]]

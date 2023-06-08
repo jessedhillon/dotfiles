@@ -35,7 +35,7 @@ return require('packer').startup(function(use)
       {'L3MON4D3/LuaSnip'},
       {'rafamadriz/friendly-snippets'},
       -- Useful status updates for LSP
-      {'j-hui/fidget.nvim'},
+      -- {'j-hui/fidget.nvim'},
       -- Additional lua configuration, makes nvim stuff amazing
       {'folke/neodev.nvim'},
     }
@@ -64,6 +64,14 @@ return require('packer').startup(function(use)
 
   -- lualine
   use('nvim-lualine/lualine.nvim')
+
+  -- tabline
+  use('kdheepak/tabline.nvim', {
+    requires = {
+      { 'hoob3rt/lualine.nvim', opt = true },
+      {'kyazdani42/nvim-web-devicons', opt = true}
+    }
+  })
 
   -- comment
   use({

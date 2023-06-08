@@ -1,3 +1,11 @@
+local function modified()
+  if vim.bo.modified then
+   return [[✱]]
+  else
+   return ""
+  end
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = true,
@@ -20,16 +28,21 @@ require('lualine').setup {
   sections = {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
-    lualine_c = {'filename'},
+    -- lualine_c = {'filename'},
+    lualine_c = {'vim.fn.expand("%")', modified},
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
-    lualine_z = {'location'}
+    -- lualine_z = {'location'}
+    lualine_z = {'vim.fn.winnr()', 'location'},
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    -- lualine_c = {'filename'},
+    lualine_c = {'vim.fn.expand("%")', modified},
+
+    -- lualine_x = {'location'},
+    lualine_x = {'vim.fn.winnr()', 'location'},
     lualine_y = {},
     lualine_z = {}
   },

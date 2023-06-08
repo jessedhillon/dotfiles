@@ -50,7 +50,8 @@ require("neo-tree").setup({
     icon = {
       folder_closed = "",
       folder_open = "",
-      folder_empty = "ﰊ",
+      folder_empty = "",
+      -- folder_empy = "ﰊ",
       -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
       -- then these will never be used.
       default = "*",
@@ -73,10 +74,10 @@ require("neo-tree").setup({
         deleted   = "✖",-- this can only be used in the git_status source
         renamed   = "",-- this can only be used in the git_status source
         -- Status type
-        untracked = "◌",
+        untracked  = "⬚",
         ignored   = "",
-        unstaged  = "○",
-        staged    = "●",
+        unstaged = "◉",
+        staged    = "",
         conflict  = "⊗",
         -- untracked = "",
         -- unstaged  = "",
