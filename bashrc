@@ -163,3 +163,8 @@ set -b
 # gnome
 export GTK_IM_MODULE="gtk-im-context-simple"
 export GTK_IM_MODULE="xim"
+
+# direnv
+if [ -x /usr/bin/direnv ]; then
+    eval "$(/usr/bin/direnv hook bash)"
+fi
