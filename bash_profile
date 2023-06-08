@@ -21,3 +21,6 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 PATH=".:$PATH"
+
+
+xset r rate 300 45
