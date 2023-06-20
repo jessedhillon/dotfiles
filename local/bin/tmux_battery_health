@@ -82,21 +82,26 @@ ticks=( ! ▂ ▃ ▄ ▅ ▆ ▇ █ )
 n=$(( $Ratio << 8 ))
 d=$(( (100 << 8)/(${#ticks[@]}-1) ))
 tick=${ticks[$(( $n/$d ))]}
+has_battery=$(ls -A /sys/class/power_supply | wc -l)
 
-if [ "$Connected" = true ]; then
-    lightning_bolt
-else
-    if [ "$Ratio" -le 18 ]; then
-        echo -n "#[bg=colour196,fg=colour195]"
-        # flash the icon for 2 out of 6 seconds
-        m=$(expr `date +"%S"` % 6)
-        if [ "$m" -lt 2 ]; then
-            lightning_bolt true
-        else
-            lightning_bolt false
-        fi
+if [ "$has_battery" -gt 0 ]; then
+    if [ "$Connected" = true ]; then
+        lightning_bolt
     else
-        echo -n "${tick} "
+        if [ "$Ratio" -le 18 ]; then
+            echo -n "#[bg=colour196,fg=colour195]"
+            # flash the icon for 2 out of 6 seconds
+            m=$(expr `date +"%S"` % 6)
+            if [ "$m" -lt 2 ]; then
+                lightning_bolt true
+            else
+                lightning_bolt false
+            fi
+        else
+            echo -n "${tick} "
+        fi
     fi
+    printf "%2s%%" $Ratio
+else
+    echo ""
 fi
-printf "%2s%%" $Ratio
