@@ -113,4 +113,10 @@ return require('packer').startup(function(use)
       }
     }
   }
+
+  -- dev containers
+  use {
+    'https://codeberg.org/esensar/nvim-dev-container',
+    requires = { 'nvim-treesitter/nvim-treesitter' }
+  }
 end)
