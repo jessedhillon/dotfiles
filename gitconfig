@@ -1,4 +1,4 @@
-# vim: set ft=dosini:
+# vim: set ft=gitconfig:
 
 [core]
     excludesfile = ~/.gitignore
