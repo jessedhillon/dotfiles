@@ -72,15 +72,6 @@ else
 fi
 unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
-
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -152,7 +143,6 @@ fi
 # construct PROMPT_COMMAND
 joined="$( printf " && %s" "${PROMPT_COMMANDS[@]}" )"
 PROMPT_COMMAND="${joined:4}"
-$PROMPT_COMMAND
 
 # gpg
 export GPG_TTY=$(tty)
@@ -168,3 +158,12 @@ export GTK_IM_MODULE="xim"
 if [ -x /usr/bin/direnv ]; then
     eval "$(/usr/bin/direnv hook bash)"
 fi
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
