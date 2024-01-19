@@ -31,10 +31,8 @@
     name = Jesse Dhillon
 [push]
 	default = simple
-
 [hub]
-protocol = ssh
-
+    protocol = ssh
 [rebase]
 	autosquash = true
 [init]
