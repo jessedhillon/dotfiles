@@ -78,3 +78,8 @@ vim.opt.ttimeoutlen = 0
 -- insert a single char
 vim.keymap.set("n", "<silent> s", ':exec "normal i".nr2char(getchar()).""<CR>')
 vim.keymap.set("n", "<silent> S", ':exec "normal a".nr2char(getchar()).""<CR>')
+
+-- treesitter-context
+vim.keymap.set("n", "[c", function()
+  require("treesitter-context").go_to_context()
+end, { silent = true })
