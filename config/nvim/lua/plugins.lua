@@ -119,4 +119,7 @@ return require('packer').startup(function(use)
     'https://codeberg.org/esensar/nvim-dev-container',
     requires = { 'nvim-treesitter/nvim-treesitter' }
   }
+
+  -- specific filetypes
+  use('HiPhish/jinja.vim')
 end)
