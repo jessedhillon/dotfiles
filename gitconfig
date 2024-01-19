@@ -21,6 +21,11 @@
     unstage = reset HEAD
     current-branch = rev-parse --abbrev-ref HEAD
     cb = rev-parse --abbrev-ref HEAD
+    fixup = "!git commit --fixup $(git pick)"
+    pick = "!git log $1 -n 50 --decorate --pretty=format:'%h %s (%cn) %d' --no-merges | fzf | cut -c -7 | tr '\\n' ' ' | xargs -o echo"
+    mpick = "!git log $1 -n 50 --decorate --pretty=format:'%h %s (%cn) %d' --no-merges | fzf -m | cut -c -7 | tr '\\n' ' ' | xargs -o echo"
+    brpick = "!git branch | fzf | xargs -o echo"
+    deconflict = "!f() { vim -p `git diff --name-only | uniq`; }; f"
 [user]
     email = jesse@dhillon.com
     name = Jesse Dhillon
