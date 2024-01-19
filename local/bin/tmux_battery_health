@@ -76,7 +76,7 @@ lightning_bolt()
     esac
 }
 
-battery_status
+battery_status > /dev/null
 
 ticks=( ! ▂ ▃ ▄ ▅ ▆ ▇ █ )
 n=$(( $Ratio << 8 ))
