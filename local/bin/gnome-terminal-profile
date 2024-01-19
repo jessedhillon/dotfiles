@@ -1,0 +1,139 @@
+#!/usr/bin/python3
+
+import os
+import subprocess
+import uuid
+
+import click
+from gi.repository import Gio, GLib
+
+
+@click.group()
+def main():
+    pass
+
+
+@main.command('get')
+def get():
+    bus = Gio.bus_get_sync(Gio.BusType.SESSION)
+
+    screen_id = get_screen_id()
+    window_id = get_window_for_screen(bus, screen_id)
+
+    _, _, profile_ids = describe(bus, 'org.gnome.Terminal', window_id,
+                                 'profile', '(bgav)')
+    profile_id = uuid.UUID(profile_ids[0])
+    print(str(profile_id))
+
+
+@main.command('watch')
+def watch():
+    bus = Gio.bus_get_sync(Gio.BusType.SESSION)
+
+    screen_id = get_screen_id()
+    window_id = get_window_for_screen(bus, screen_id)
+    _, _, profile_ids = describe(bus, 'org.gnome.Terminal', window_id,
+                                 'profile', '(bgav)')
+    profile_id = uuid.UUID(profile_ids[0])
+    print(str(profile_id))
+
+    def on_change(bus, addr, window_id, interface_name, signal_name,
+                  params, user_data):
+        _, _, props, _ = params
+        if 'profile' in props:
+            print(props['profile'])
+
+    rs = bus.signal_subscribe(None, 'org.gtk.Actions', 'Changed', window_id, None,
+                              Gio.DBusCallFlags.NONE, on_change, None)
+    breakpoint()
+    loop = GLib.MainLoop()
+    loop.run()
+
+
+def get_screen_id():
+    path = None
+    if 'TMUX' in os.environ:
+        rs = subprocess.run(['/usr/bin/tmux',
+                             'show-environment',
+                             'GNOME_TERMINAL_SCREEN'],
+                            capture_output=True)
+        out = rs.stdout.decode('utf8').strip()
+        _, path = out.split('=', 1)
+    else:
+        path = os.getenv('GNOME_TERMINAL_SCREEN')
+    if path is not None:
+        id = path.rsplit('/', 1)[-1]
+        return uuid.UUID(id.replace('_', '-'))
+    raise RuntimeError("could not get screen ID")
+
+
+def get_window_for_screen(bus, screen_id):
+    windows = []
+    for path, _ in introspect_tree(bus, 'org.gnome.Terminal',
+                                   '/org/gnome/Terminal'):
+        if path.startswith('/org/gnome/Terminal/window/'):
+            windows.append(path)
+
+    this_window = None
+    for path in windows:
+        _, _, screen_ids = describe(bus, 'org.gnome.Terminal', path,
+                                    'screens', '(bgav)')
+        screen_ids = [uuid.UUID(s[0]) for s in screen_ids]
+        if screen_id in screen_ids:
+            this_window = path
+            break
+
+    if this_window is None:
+        raise RuntimeError("could not determine our window")
+
+    return this_window
+
+
+def describe(bus, name, object_path, param, vtype):
+    res = bus.call_sync(name,
+                        object_path,
+                        'org.gtk.Actions',
+                        'Describe',
+                        GLib.Variant('(s)', [param]),
+                        GLib.VariantType(f'({vtype})'),
+                        Gio.DBusCallFlags.NONE,
+                        -1,
+                        None)
+    breakpoint()
+    return res[0]
+
+
+def introspect(bus, name, object_path):
+    res = bus.call_sync(
+        name,  # bus_name
+        object_path,  # object_path
+        'org.freedesktop.DBus.Introspectable',  # interface_name
+        'Introspect',  # method_name
+        None,  # parameters
+        GLib.VariantType("(s)"),  # reply_type
+        Gio.DBusCallFlags.NONE,  # flags
+        -1,  # timeout_msecs
+        None)  # cancellable
+
+    if not res:
+        return None
+
+    return Gio.DBusNodeInfo.new_for_xml(res[0])
+
+
+def introspect_tree(bus, name, object_path):
+    node = introspect(bus, name, object_path)
+
+    if node:
+        yield object_path, node
+
+        if object_path == '/':
+            object_path = ''
+
+        for child in node.nodes:
+            yield from introspect_tree(bus, name,
+                                       f'{object_path}/{child.path}')
+
+
+if __name__ == '__main__':
+    main()
