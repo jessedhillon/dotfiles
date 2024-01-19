@@ -66,6 +66,12 @@ vim.keymap.set("n", "tl", ":tabnext<CR>")
 vim.keymap.set("n", "t<", ":tabmove -1<CR>")
 vim.keymap.set("n", "t>", ":tabmove +1<CR>")
 
+-- quickfix list
+vim.keymap.set("n", "]q", ":cnext<CR>")
+vim.keymap.set("n", "[q", ":cprev<CR>")
+vim.keymap.set("n", "]Q", ":cnf<CR>")
+vim.keymap.set("n", "[Q", ":cpf<CR>")
+
 vim.opt.timeoutlen = 250
 vim.opt.ttimeoutlen = 0
 
