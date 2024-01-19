@@ -35,18 +35,18 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
-  -- sumneko_lua = {
-  --   Lua = {
-  --     workspace = { checkThirdParty = false },
-  --     telemetry = { enable = false },
-  --     diagnostics = {
-  --       globals = { 'vim' }
-  --     }
-  --   },
-  -- },
+  lua_ls = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    },
+  },
   pylsp = {
     pylsp = {
-      configurationSources = { 'flake8' },
+      configurationSources = { 'pycodestyle' },
       plugins = {
         flake8 = { enabled = true },
         pyflakes = { enabled = false },
