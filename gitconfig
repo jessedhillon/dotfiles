@@ -11,8 +11,13 @@
     co = checkout
     cp = cherry-pick
     br = branch
-    ls = log --pretty=\"format:%h %s (%cn, %ah)\n-------\" --name-status
-    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    ls = log --decorate --pretty=\"format:%C(yellow)%h%C(reset) %s %C(cyan)(%an)%C(reset)%C(auto)%d%C(reset)\n-------\" --name-status
+    refls = reflog --decorate --pretty=\"format:%C(yellow)%h%C(reset) %gD %gs %C(cyan)(%an)%C(reset)%C(auto)%d%C(reset)\n-------\" --name-status
+    lg = log --decorate --pretty=format:'%C(yellow)%h%C(reset) %C(magenta)%ad%C(reset) %C(cyan)(%an %GS)%C(reset) %s%C(auto)%d%C(reset)'
+    lg5 = lg -n5
+    lg10 = lg -n10
+    reflg = reflog --decorate --pretty=format:'%C(yellow)%h%C(reset) %gD %gs %C(cyan)(%an)%C(reset)%C(auto)%d%C(reset)'
+    hist = log --graph --decorate --pretty=format:'%C(yellow)%h%C(reset) %C(magenta)%ad%C(reset) %C(cyan)(%an %GS)%C(reset) %s%C(auto)%d%C(reset)'
     unstage = reset HEAD
     current-branch = rev-parse --abbrev-ref HEAD
     cb = rev-parse --abbrev-ref HEAD
