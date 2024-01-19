@@ -35,9 +35,9 @@ vim.opt.startofline = false
 
 -- autocommands for filetypes
 vim.cmd[[
-    au BufRead,BufNewFile *.jinja2 set ft=htmljinja
+    au BufRead,BufNewFile *.jinja2 set ft=htmldjango
     " au FileType * let &colorcolumn=""
-    au FileType python,javascript,typescript let &colorcolumn="120,".join(range(140,999),",")
+    au FileType python,javascript,typescript let &colorcolumn="80,".join(range(121,999),",")
     au FileType python,java,javascript,typescript,c,cc,cpp,ruby,htmljinja,css,scss,yaml set number
     au FileType python set ts=4 sw=4 sts=0 et
     au FileType ruby,htmljinja,html,yaml,scss,css,c,cc,cpp,ledger,lua,javascript,typescript,soy set ts=2 sw=2 sts=0
