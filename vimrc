@@ -59,6 +59,8 @@ Plugin 'mxw/vim-jsx'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'ap/vim-css-color'
 Plugin 'digitaltoad/vim-pug'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'ghifarit53/tokyonight-vim'
 
 call vundle#end()            " required
 
@@ -84,12 +86,18 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 " jsx
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
-" solarized
+" colors
 syntax enable
 filetype off
 filetype plugin indent on
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
+set termguicolors
+let g:tokyonight_style = 'storm' " available: night, storm
+let g:tokyonight_enable_italic = 1
+colorscheme tokyonight
+
+"vim.api.nvim_set_hl(0, 'NeoTreeGitUntracked', { fg = "#0ea1e7" })
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
