@@ -3,7 +3,8 @@
 [core]
     excludesfile = ~/.gitignore
     editor = vim
-
+[log]
+    date = local
 [alias]
     st = status
     ci = commit -S --verbose
