@@ -221,4 +221,4 @@ require("neo-tree").setup({
   }
 })
 
-vim.cmd([[nnoremap \ :Neotree toggle<cr>]])
+vim.cmd([[nnoremap \ :Neotree reveal=true action=focus toggle<cr>]])
