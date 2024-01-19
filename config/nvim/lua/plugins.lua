@@ -5,7 +5,7 @@ return require('packer').startup(function(use)
   use('wbthomason/packer.nvim')
 
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
+    'nvim-telescope/telescope.nvim', tag = '0.1.4',
     requires = { {'nvim-lua/plenary.nvim'}, {'BurntSushi/ripgrep'} }
   }
 
@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
   use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
   use('mbbill/undotree')
   use('nvim-treesitter/playground')
+  use('nvim-treesitter/nvim-treesitter-context')
 
   -- LSP Zero
   use {
@@ -42,7 +43,6 @@ return require('packer').startup(function(use)
   }
 
   -- treesitter text-objects
-  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
   use({
     'nvim-treesitter/nvim-treesitter-textobjects',
     after = 'nvim-treesitter',
