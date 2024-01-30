@@ -9,7 +9,6 @@ if not [k for k in globals().keys() if not k.startswith('__')]:
     import rlcompleter
     from pprint import pprint as pp
 
-    sys.path.insert(1,'/home/jesse/.local/lib/python2.7/site-packages')
     history_path = os.path.expanduser("~/.python_history")
 
     def save_history(history_path=history_path):
