@@ -23,4 +23,6 @@ fi
 PATH=".:$PATH"
 
 
-xset r rate 300 45
+if [ $XDG_SESSION_TYPE == "x11" ]; then
+    xset r rate 300 45
+fi
