@@ -5,9 +5,19 @@ return require('packer').startup(function(use)
   use('wbthomason/packer.nvim')
 
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.4',
+    'nvim-telescope/telescope.nvim', branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'}, {'BurntSushi/ripgrep'} }
   }
+
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make'
+  }
+
+  -- use { "ibhagwan/fzf-lua",
+  --   -- optional for icon support
+  --   requires = { "nvim-tree/nvim-web-devicons" }
+  -- }
 
   -- use 'overcache/NeoSolarized'
   use 'folke/tokyonight.nvim'
