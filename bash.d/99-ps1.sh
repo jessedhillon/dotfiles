@@ -1,7 +1,7 @@
 #!/bin/bash
 
 _update_ps1() {
-    local status=$?
+    local exit_status=$?
 
     # basic terminal colors
     local black="\[\033[38;5;0m\]"
@@ -14,30 +14,31 @@ _update_ps1() {
     local white="\[\033[38;5;7m\]"
 
     # extended colors
-    local grey_offwhite="\[\033[38;5;241m\]"
-    local deep_red="\[\033[38;5;196m\]"
-    local sky_blue="\[\033[38;5;45m\]"
-    local electric_blue="\[\033[38;5;39m\]"
-    local indigo="\[\033[38;5;63m\]"
-    local midnight="\[\033[38;5;69m\]"
-    local lavender="\[\033[38;5;105m\]"
-    local azure="\[\033[38;5;123m\]"
+    local acid="\[\033[38;5;194m\]"
     local android="\[\033[38;5;79m\]"
+    local azure="\[\033[38;5;123m\]"
+    local banana="\[\033[38;5;184m\]"
+    local burnt="\[\033[38;5;172m\]"
+    local deep_red="\[\033[38;5;196m\]"
+    local electric_blue="\[\033[38;5;39m\]"
+    local grey_offwhite="\[\033[38;5;249m\]"
+    local indigo="\[\033[38;5;63m\]"
+    local lavender="\[\033[38;5;105m\]"
     local lilac="\[\033[38;5;153m\]"
     local lime="\[\033[38;5;154m\]"
-    local burnt="\[\033[38;5;172m\]"
-    local acid="\[\033[38;5;194m\]"
-    local banana="\[\033[38;5;184m\]"
-    local tan="\[\033[38;5;231m\]"
     local magenta="\[\033[38;5;207m\]"
-    local rose="\[\033[38;5;225m\]"
+    local midnight="\[\033[38;5;69m\]"
     local pink="\[\033[38;5;219m\]"
+    local rose="\[\033[38;5;225m\]"
+    local sky_blue="\[\033[38;5;45m\]"
+    local tan="\[\033[38;5;231m\]"
     local tangerine="\[\033[38;5;214m\]"
 
     # styles
     local subtle=$grey_offwhite
     local danger=$deep_red
     local warning=$orange
+    local attention=$purple
 
     local git_dirty_style=$red
     local git_warn_style=$orange
@@ -45,7 +46,7 @@ _update_ps1() {
     local git_clean_style=$green
     local git_stash_style=$sky_blue
 
-    local cwd_style=$rose
+    local cwd_style=$purple
     local jobs_style=$tangerine
     local dirs_style=$electric_blue
     local user_style=$acid
@@ -54,37 +55,25 @@ _update_ps1() {
     local off="\[\033[0m\]"
 
     # surround, join, and space helper functions
-    angle_if() {
-        if [ -z "$1" ]; then
+    surround_ne() {
+        # surround if non-empty
+        # $1: a length 2 string containing left/right surround chars e.g. () {} <>
+        # $2: the thing to test and surround if non-empty
+        if [ -z "$2" ]; then
             echo ""
             return
         fi
 
-        echo "<$1>"
-        return
-    }
-
-    bracket_if() {
-        if [ -z "$1" ]; then
-            echo ""
-            return
-        fi
-
-        echo "{$1}"
-        return
-    }
-
-    parens_if() {
-        if [ -z "$1" ]; then
-            echo ""
-            return
-        fi
-
-        echo "($1)"
-        return
+        ls=${1:0:1}
+        rs=${1:1:1}
+        echo "${ls}${2}${rs}"
     }
 
     join() {
+        # join two strings with a delimiter, testing whether either/both are empty first
+        # $1: the delimiter
+        # $2: left str
+        # $3: right str
         if [ -n "$2" -a -n "$3" ]; then
             echo "$2$1$3"
         elif [ -z "$2" -a -n "$3" ]; then
@@ -94,7 +83,7 @@ _update_ps1() {
         fi
     }
 
-    prepend_if() {
+    prefix_ne() {
         if [ -n "$2" ]; then
             if [ -n "$1" ]; then
                 echo "$1$2"
@@ -104,7 +93,7 @@ _update_ps1() {
         fi
     }
 
-    append_if() {
+    suffix_ne() {
         if [ -n "$2" ]; then
             if [ -n "$1" ]; then
                 echo "$2$1"
@@ -124,7 +113,7 @@ _update_ps1() {
 
     colorize() {
         if [ -n "$2" ]; then
-            echo "$1$2$off"
+            echo "${1}${2}${off}"
         fi
     }
 
@@ -197,7 +186,7 @@ _update_ps1() {
         # in case we want to show multiple environments e.g. node version
         local env_name=`join "." $venv`
         local joined=`join "$subtle|$gitcolor" $env_name ${gp}`
-        echo $(colorize $gitcolor "`append_if ' ' $(bracket_if $joined)`")
+        echo $(colorize $gitcolor "`suffix_ne ' ' $(surround_ne '{}' $joined)`")
     }
 
     user_host_cmp() {
@@ -241,11 +230,11 @@ _update_ps1() {
     }
 
     jobs_cmp() {
-        echo $(colorize $jobs_style $(prepend_if "%" `blank_if_zero $(jobs | wc -l)`))
+        echo $(colorize $jobs_style $(prefix_ne "%" `blank_if_zero $(jobs | wc -l)`))
     }
 
     dirs_cmp() {
-        echo $(colorize $dirs_style $(append_if "#" `blank_if_zero $(dirs -v | cut -d' ' -f2 | sort -nr | head -1)`))
+        echo $(colorize $dirs_style $(suffix_ne "#" `blank_if_zero $(dirs -v | cut -d' ' -f2 | sort -nr | head -1)`))
     }
 
     timestamp_cmp() {
@@ -257,23 +246,12 @@ _update_ps1() {
                  "$(venv_branch_cmp)"
                  $(user_host_cmp)
                  $(jobs_cmp)
-                 "${subtle}:"
+                 "${subtle}:${off}"
                  $(dirs_cmp)
                  $(cwd_cmp)
-                 $(prompt_cmp $status) )
+                 $(prompt_cmp $exit_status) )
     local IFS=
     export PS1="${cmps[*]}${off} "
-}
-
-_update_title () {
-    if [ "$BASH_COMMAND" == '_update_ps1' ]; then
-        title=$PWD
-    elif [ "$1" ]; then
-        title=$@
-    else
-        title=$BASH_COMMAND
-    fi
-    printf "\e]0;%s\007" "$title"
 }
 
 foreground() {
@@ -289,10 +267,9 @@ foreground() {
             jobname=$(jobs | grep -e "^\[[[:digit:]]\+\]+" | awk '{$1=$2=""; print $0}');;
     esac
     $extglob_state
-    _update_title ${jobname##*( )}
+    printf "\033]2;%s\033\\" "${jobname##*( )}";
     \fg $1
 }
 alias fg=foreground
 
 PROMPT_COMMANDS=(${PROMPT_COMMANDS[@]} '_update_ps1')
-trap '_update_title' DEBUG
