@@ -11,7 +11,7 @@ vim.fn.sign_define("DiagnosticSignWarn",
 vim.fn.sign_define("DiagnosticSignInfo",
   {text = " ", texthl = "DiagnosticSignInfo"})
 vim.fn.sign_define("DiagnosticSignHint",
-  {text = "", texthl = "DiagnosticSignHint"})
+  {text = "✲", texthl = "DiagnosticSignHint"})
 -- NOTE: this is changed from v1.x, which used the old style of highlight groups
 -- in the form "LspDiagnosticsSignWarning"
 
@@ -58,7 +58,7 @@ require("neo-tree").setup({
       highlight = "NeoTreeFileIcon"
     },
     modified = {
-      symbol = "[+]",
+      symbol = "*",
       highlight = "NeoTreeModified",
     },
     name = {
@@ -71,12 +71,12 @@ require("neo-tree").setup({
         -- Change type
         added     = "", -- or "✚", but this is redundant info if you use git_status_colors on the name
         modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
-        deleted   = "✖",-- this can only be used in the git_status source
-        renamed   = "",-- this can only be used in the git_status source
+        deleted   = "🗑",-- this can only be used in the git_status source
+        renamed   = "🖉",-- this can only be used in the git_status source
         -- Status type
-        untracked  = "⬚",
+        untracked  = "+",
         ignored   = "",
-        unstaged = "◉",
+        unstaged = "❚",
         staged    = "",
         conflict  = "⊗",
         -- untracked = "",
