@@ -58,26 +58,24 @@ require'nvim-treesitter.configs'.setup {
         ['if'] = '@function.inner',
         ['ac'] = '@class.outer',
         ['ic'] = '@class.inner',
+        ['is'] = '@statement.outer',
+        ['as'] = '@statement.outer',
       },
     },
     move = {
       enable = true,
       set_jumps = true, -- whether to set jumps in the jumplist
       goto_next_start = {
-        [']m'] = '@function.outer.start',
-        [']]'] = '@class.outer',
       },
       goto_next_end = {
-        [']M'] = '@function.outer.start',
-        [']['] = '@class.outer',
+        ['<leader>m'] = '@function.outer.start',
+        ['<leader>}'] = '@class.outer',
       },
       goto_previous_start = {
-        ['[m'] = '@function.outer.start',
-        ['[['] = '@class.outer',
+        ['<leader>M'] = '@function.outer.start',
+        ['<leader>['] = '@class.outer',
       },
       goto_previous_end = {
-        ['[M'] = '@function.outer.start',
-        ['[]'] = '@class.outer',
       },
     },
     swap = {
@@ -108,5 +106,5 @@ require'nvim-treesitter.configs'.setup {
       goto_node = '<cr>',
       show_help = '?',
     },
-  }
+  },
 }
