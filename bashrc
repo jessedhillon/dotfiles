@@ -131,6 +131,7 @@ fi
 
 # python startup
 export PYTHONSTARTUP=~/.pythonstartup
+export PYTHONPATH=${HOME}/.local/lib/python3.11/site-packages/
 
 # virtualenvwrapper
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
