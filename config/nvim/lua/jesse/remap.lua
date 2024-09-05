@@ -28,7 +28,7 @@ vim.keymap.set("v", "<leader>p", '"+p')
 vim.keymap.set("n", "<leader>P", '"+P')
 
 -- window navigation
-vim.keymap.set("n", "<space>", "<c-W>w")
+-- vim.keymap.set("n", "<space>", "<c-W>w")
 -- vim.keymap.set("n", "<c-j>", "<C-W>j<C-W>_")
 -- vim.keymap.set("n", "<c-k>", "<C-W>k<C-W>_")
 vim.keymap.set("n", "<c-k>", ":res -5<CR>")
