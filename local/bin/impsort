@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+import sys
+import re as regex
+
+
+if len(sys.argv) >= 2:
+    line_width = int(sys.argv[1])
+else:
+    line_width = 120
+
+if len(sys.argv) >= 3:
+    tab_width = int(sys.argv[2])
+else:
+    tab_width = 4
+
+
+s = sys.stdin.read()
+lines = s.splitlines()
+match = regex.split('^(from [A-Z0-9a-z_.]+ import)', lines[0])
+if not match:
+    sys.exit(1)
+
+preamble = match[1]
+lines[0] = match[-1]
+
+names = set([])
+for line in lines:
+    line = line.strip()
+    if line.endswith('\\'):
+        line = line[:-1]
+    names |= set([s.strip() for s in line.split(',')])
+
+outlines = []
+curline = preamble
+indent = ' ' * tab_width
+names = sorted(n for n in names if n)  # filter empties
+for i, name in enumerate(names):
+    total = len(names)
+    first = (i == 0)
+    last = (i == len(names) - 1)
+    if first and total == 1:
+        ns = name
+    elif last and total > 1:
+        ns = ' ' + name
+    else:
+        ns = ' ' + name + ','
+
+    newlen = len(curline) + len(ns)
+    if newlen > (line_width - 1):
+        curline += '\\'
+        outlines.append(curline)
+        curline = indent + ns.strip()  # strip leading space
+    else:
+        curline += ns
+outlines.append(curline)
+
+print('\n'.join(outlines))

@@ -83,3 +83,27 @@ vim.keymap.set("n", "<silent> S", ':exec "normal a".nr2char(getchar()).""<CR>')
 vim.keymap.set("n", "[c", function()
   require("treesitter-context").go_to_context(vim.v.count1)
 end, { silent = true })
+
+-- python import sort
+  -- Define the Lua function
+function SortPythonImport()
+  -- Step 1: Select the statement using Tree-sitter text object
+  vim.cmd("TSTextobjectSelect @statement.outer")
+
+  -- Wait for the command to complete and ensure the visual selection is active
+  vim.wait(100, function()
+    return vim.fn.mode() == 'v' or vim.fn.mode() == 'V' or vim.fn.mode() == '\22'
+  end)
+
+  -- Step 2: Pipe the visual selection into `impsort`
+  -- This is a bit tricky because we're calling a shell command on the selection
+  -- The '<,'> range is implicit in visual mode for the '!' command, so we just specify the command to run
+  vim.cmd("'<,'>!impsort")
+
+  -- Step 3: Exit visual mode. This sends the escape key.
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), 'n', false)
+end
+
+-- Register the Lua function for global access
+vim.api.nvim_create_user_command('PythonImportSort', SortPythonImport, {})
+vim.api.nvim_set_keymap('n', '<leader>is', ':PythonImportSort<CR>', { noremap = true, silent = true })
