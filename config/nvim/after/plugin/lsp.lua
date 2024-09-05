@@ -2,10 +2,28 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 lsp.setup()
 
+
+local navbuddy = require("nvim-navbuddy")
+require("lspconfig").clangd.setup {
+    on_attach = function(client, bufnr)
+        navbuddy.attach(client, bufnr)
+    end
+}
+
 local on_attach = function(client, bufnr)
   local desc = function(desc)
-    return { buffer = bufnr, remap = false, desc = desc }
+    return {
+      buffer = bufnr,
+      remap = false,
+      desc = desc
+    }
   end
+
+  if client.name == 'ruff' then
+    -- Disable hover in favor of Pyright
+    client.server_capabilities.hoverProvider = false
+  end
+
   vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, desc("[G]oto [D]efinition"))
   vim.keymap.set('n', '<leader>k', vim.lsp.buf.hover, desc("Hover Documentation"))
   vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, desc("View [W]orkspace Symbol"))
@@ -44,14 +62,23 @@ local servers = {
       }
     },
   },
+  ruff = {
+    organizeImports = false,
+    init_options = {
+      settings = {
+        -- Any extra CLI arguments for `ruff` go here.
+        args = {},
+      }
+    }
+  },
   pylsp = {
     pylsp = {
-      configurationSources = { 'pycodestyle' },
+      -- configurationSources = { 'pycodestyle' },
       plugins = {
-        flake8 = { enabled = true },
+        flake8 = { enabled = false },
         pyflakes = { enabled = false },
         pycodestyle = { enabled = true },
-        pylint = { enabled = false } ,
+        pylint = { enabled = false },
       }
     }
   }
