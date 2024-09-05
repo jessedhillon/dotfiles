@@ -28,6 +28,8 @@ require("tokyonight").setup({
       bg = c.terminal_black,
       fg = c.terminal_black,
     }
+    hl.LineNr = hl.Conceal
+    hl.CursorLineNr = hl.Constant
   end,
 })
 
