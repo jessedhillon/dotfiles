@@ -46,7 +46,7 @@ _update_ps1() {
     local git_clean_style=$green
     local git_stash_style=$sky_blue
 
-    local cwd_style=$purple
+    local cwd_style=$lilac
     local jobs_style=$tangerine
     local dirs_style=$electric_blue
     local user_style=$acid
