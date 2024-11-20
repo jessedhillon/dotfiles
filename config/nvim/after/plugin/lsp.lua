@@ -53,6 +53,7 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
+  pyright = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -71,17 +72,17 @@ local servers = {
       }
     }
   },
-  pylsp = {
-    pylsp = {
-      -- configurationSources = { 'pycodestyle' },
-      plugins = {
-        flake8 = { enabled = false },
-        pyflakes = { enabled = false },
-        pycodestyle = { enabled = true },
-        pylint = { enabled = false },
-      }
-    }
-  }
+  -- pylsp = {
+  --   pylsp = {
+  --     -- configurationSources = { 'pycodestyle' },
+  --     plugins = {
+  --       flake8 = { enabled = false },
+  --       pyflakes = { enabled = false },
+  --       pycodestyle = { enabled = true },
+  --       pylint = { enabled = false },
+  --     }
+  --   }
+  -- }
 }
 
 mason_lspconfig.setup {
