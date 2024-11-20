@@ -1,0 +1,64 @@
+#!/bin/bash
+
+# Function to get the length of a history
+history_size() {
+    gpaste-client history-size "$1"
+}
+
+# Push the most recent entry from the "history" to the "_"
+push() {
+    # Check if the main history has any entries
+    if [ "$(history_size 'history')" -eq 1 ]; then
+        echo "Error: main history ('history') is empty, nothing to push."
+        gpaste-client show-history
+        return 1
+    fi
+
+    # Retrieve the most recent entry from the main history and push it to the "_"
+    _GP="$(gpaste-client switch-history "history" && gpaste-client --reverse --use-index get 0)"
+    gpaste-client switch-history "_"
+    printf "%s" "$_GP" | gpaste-client
+    gpaste-client switch-history "history"
+    gpaste-client --reverse --use-index delete 0
+    notify-send --app-name="GPaste" --icon /usr/share/icons/gnome/scalable/actions/edit-copy-symbolic.svg -u normal "$(gpaste-client --reverse --use-index get 0 | cut -c-40)"
+    echo "Pushed entry to '_'."
+}
+
+# Pop the most recent entry from the "_" back to the "history"
+pop() {
+    # Check if the temporary history has any entries
+    if [ "$(history_size '_')" -eq 0 ]; then
+        echo "Error: Temporary history ('_') is empty. Nothing to pop."
+        gpaste-client show-history
+        return 1
+    fi
+
+    # Retrieve the most recent entry from the "_" and pop it back to the main history
+    _GP="$(gpaste-client switch-history "_" && gpaste-client --reverse --use-index get 0)"
+    gpaste-client switch-history "history"
+    printf "%s" "$_GP" | gpaste-client
+    gpaste-client switch-history "_"
+    gpaste-client --reverse --use-index delete 0
+    gpaste-client switch-history "history"
+    notify-send --app-name="GPaste" --icon /usr/share/icons/gnome/scalable/actions/edit-copy-symbolic.svg -u normal "$(gpaste-client --reverse --use-index get 0 | cut -c-40)"
+    echo "Popped entry to 'history'."
+}
+
+# Main script logic
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <push|pop>"
+    exit 1
+fi
+
+case "$1" in
+    push)
+        push
+        ;;
+    pop)
+        pop
+        ;;
+    *)
+        echo "Invalid argument: $1. Use 'push' or 'pop'."
+        exit 1
+        ;;
+esac
