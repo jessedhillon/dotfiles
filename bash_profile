@@ -21,8 +21,3 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 PATH=".:$PATH"
-
-
-if [ $XDG_SESSION_TYPE == "x11" ]; then
-    xset r rate 300 45
-fi
