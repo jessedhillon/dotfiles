@@ -46,7 +46,7 @@ vim.cmd[[
     au FileType markdown set wrap lbr
     au FileType markdown setlocal textwidth=120
     " hack because cmp window.documentation = false config is not respected currently
-    au FileType * lua require('cmp.config').get().window.documentation = false
+    " au FileType * lua require('cmp.config').get().window.documentation = false
 ]]
 
 -- catch trailing space
